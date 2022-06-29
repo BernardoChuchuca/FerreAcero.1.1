@@ -3,10 +3,11 @@ package usp.edu.ec.FerreAcero.entidades;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Persona {
+public class Persona implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

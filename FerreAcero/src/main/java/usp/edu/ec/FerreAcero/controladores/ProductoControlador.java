@@ -4,36 +4,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import usp.edu.ec.FerreAcero.entidades.Persona;
-import usp.edu.ec.FerreAcero.entidades.peticiones.persona.ActualizarPersona;
-import usp.edu.ec.FerreAcero.entidades.peticiones.persona.Crear_Persona;
-import usp.edu.ec.FerreAcero.servicios.PersonaExeption;
-import usp.edu.ec.FerreAcero.servicios.PersonaServicio;
+import usp.edu.ec.FerreAcero.entidades.Producto;
+
+import usp.edu.ec.FerreAcero.servicios.ProductoServicio;
 
 import java.util.List;
 import java.util.Optional;
-
 @RestController
-public class PersonaControlador {
+public class ProductoControlador {
 
-    private PersonaServicio personaServicio;
+    private ProductoServicio productoServicio;
 
     @Autowired
-    public void setPersonaServicio(PersonaServicio personaServicio) {
+    public void setProductoServicio(ProductoServicio productoServicio) {
 
-        this.personaServicio = personaServicio;
+        this.productoServicio = productoServicio;
     }
 
-    @GetMapping("/personas")
-    public ResponseEntity<List<Persona>> getAllPersona(){
+    @GetMapping("/productos")
+    public ResponseEntity<List<Producto>>getAllProducto(){
 
-        List<Persona> listaPersona=personaServicio.findAll();
+        List<Producto> listaProducto=productoServicio.findAll();
 
-        return new ResponseEntity<List<Persona>>(listaPersona, HttpStatus.OK);
+        //return new ResponseEntity<List<Producto>>(listaProducto, HttpStatus.OK);
+        return  new ResponseEntity<List<Producto>>(listaProducto,HttpStatus.OK);
 
     }
 
-    @GetMapping("{codigo}/nombre")
+    /*@GetMapping("{codigo}/nombre")
 
     public ResponseEntity<String> Consulta (@PathVariable int codigo){
         String nombre = personaServicio.ConsultaDatos(codigo);
@@ -79,7 +77,7 @@ public class PersonaControlador {
 
         return new ResponseEntity<Persona>(persona,HttpStatus.OK);
 
-    }*/
+    }
 
     @PutMapping("/persona/update")
     public ResponseEntity<String>updatePersona(@RequestBody ActualizarPersona actualizarPersona) {
@@ -119,7 +117,6 @@ public class PersonaControlador {
         return ResponseEntity.ok("Persona Eliminada");
 
 
-    }
+    }*/
 
 }
-

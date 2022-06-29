@@ -1,4 +1,6 @@
 package usp.edu.ec.FerreAcero.entidades;
 
-public class Carrito {
+import java.io.Serializable;
+
+public class Carrito implements Serializable {
 }
