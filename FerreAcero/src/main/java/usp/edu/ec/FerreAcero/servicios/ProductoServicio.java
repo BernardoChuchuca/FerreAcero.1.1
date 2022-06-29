@@ -21,10 +21,10 @@ public class ProductoServicio {
         return (List<Producto>)productoRespositorio.findAll();
     }
 
-    public String ConsultaDatos(int codigo){
+    public Producto ConsultaDatos(int codigo){
 
 
-        return (String) productoRespositorio.findProductoByCodigo(codigo);
+        return (Producto) productoRespositorio.findProductoByCodigo(codigo);
     }
 
     public Producto ConsultaDatosP(String nombre){

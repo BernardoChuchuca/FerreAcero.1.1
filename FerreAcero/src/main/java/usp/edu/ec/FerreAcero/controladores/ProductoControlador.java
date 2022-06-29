@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import usp.edu.ec.FerreAcero.entidades.Producto;
 
+import usp.edu.ec.FerreAcero.servicios.ProductoExeption;
 import usp.edu.ec.FerreAcero.servicios.ProductoServicio;
 
 import java.util.List;
@@ -26,10 +27,30 @@ public class ProductoControlador {
 
         List<Producto> listaProducto=productoServicio.findAll();
 
-        //return new ResponseEntity<List<Producto>>(listaProducto, HttpStatus.OK);
+
         return  new ResponseEntity<List<Producto>>(listaProducto,HttpStatus.OK);
 
     }
+    @GetMapping("/producto/{nombre}")
+
+    public ResponseEntity<Producto> getProductoNombre (@PathVariable String nombre) throws ProductoExeption {
+        Optional<Producto> producto = Optional.ofNullable(productoServicio.ConsultaDatosP(nombre));
+        Producto persona1=producto.orElseThrow(ProductoExeption::new);
+
+        return new ResponseEntity<Producto>(persona1,HttpStatus.OK);
+
+    }
+
+    @GetMapping("/producto/codigo/{id}")
+
+    public ResponseEntity<Producto> getProductoID (@PathVariable int id) throws ProductoExeption {
+        Optional<Producto> producto = Optional.ofNullable(productoServicio.ConsultaDatos(id));
+        Producto producto1=producto.orElseThrow(ProductoExeption::new);
+
+        return new ResponseEntity<Producto>(producto1,HttpStatus.OK);
+
+    }
+
 
     /*@GetMapping("{codigo}/nombre")
 
@@ -39,16 +60,8 @@ public class ProductoControlador {
         return new ResponseEntity<String>(nombre,HttpStatus.OK);
 
     }
+/*
 
-    @GetMapping("/persona/{cedula}")
-
-    public ResponseEntity<Persona> getPersona (@PathVariable String cedula) throws PersonaExeption {
-        Optional<Persona> persona = Optional.ofNullable(personaServicio.ConsultaDatosP(cedula));
-        Persona persona1=persona.orElseThrow(PersonaExeption::new);
-
-        return new ResponseEntity<Persona>(persona1,HttpStatus.OK);
-
-    }
 
 
     @PostMapping("/persona/create")

@@ -5,8 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 import usp.edu.ec.FerreAcero.entidades.Producto;
 
 public interface ProductoRespositorio extends CrudRepository<Producto, Integer> {
-    @Query("Select p.nombre,p.id from Producto p where p.id= :id")
-    String findProductoByCodigo(int id);
+    @Query("Select p from Producto p where p.id= :id")
+    Producto findProductoByCodigo(int id);
 
 
 
