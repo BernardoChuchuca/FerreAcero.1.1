@@ -21,6 +21,10 @@ public class ActualizarPersona {
     @JsonProperty
     private String telefono;
 
+    @JsonProperty
+    private String tipo;
+
+
 
     public int getId() {
         return id;
@@ -84,6 +88,14 @@ public class ActualizarPersona {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return tipo;
     }
 }
 

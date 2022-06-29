@@ -1,13 +1,13 @@
 package usp.edu.ec.FerreAcero.entidades;
 
-import usp.edu.ec.FerreAcero.entidades.peticiones.persona.Rols;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Persona {
+public class Persona implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,9 +20,16 @@ public class Persona {
     private String direccion;
     private String email;
     private String telefono;
-    @OneToOne(fetch = FetchType.LAZY,mappedBy = "persona", cascade = CascadeType.ALL)
-    private Rols rols;
 
+    private String tipo;
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
 
     public int getId() {
         return id;
@@ -88,15 +95,9 @@ public class Persona {
         this.telefono = telefono;
     }
 
-    public Rols getRols() {
-        return rols;
-    }
 
-    public void setRols(Rols rols) {
-        this.rols = rols;
-    }
 
-    public Persona(int id, String nombre, String apellido, String clave, String cedula, String direccion, String email, String telefono, Rols rols) {
+    public Persona(int id, String nombre, String apellido, String clave, String cedula, String direccion, String email, String telefono) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -105,9 +106,24 @@ public class Persona {
         this.direccion = direccion;
         this.email = email;
         this.telefono = telefono;
-        this.rols = rols;
+
     }
     public Persona(){
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Persona)) return false;
+        Persona persona = (Persona) o;
+        return id == persona.id && Objects.equals(nombre, persona.nombre) && Objects.equals(apellido, persona.apellido) && Objects.equals(clave, persona.clave) && Objects.equals(cedula, persona.cedula) && Objects.equals(direccion, persona.direccion) && Objects.equals(email, persona.email) && Objects.equals(telefono, persona.telefono) && Objects.equals(tipo, persona.tipo);
+    }
+
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombre, apellido, clave, cedula, direccion, email, telefono, tipo);
     }
 
     @Override
@@ -121,20 +137,7 @@ public class Persona {
                 ", direccion='" + direccion + '\'' +
                 ", email='" + email + '\'' +
                 ", telefono='" + telefono + '\'' +
+                ", tipo='" + tipo + '\'' +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Persona)) return false;
-        Persona persona = (Persona) o;
-        return id == persona.id && Objects.equals(nombre, persona.nombre) && Objects.equals(apellido, persona.apellido) && Objects.equals(clave, persona.clave) && Objects.equals(cedula, persona.cedula) && Objects.equals(direccion, persona.direccion) && Objects.equals(email, persona.email) && Objects.equals(telefono, persona.telefono) && Objects.equals(rols, persona.rols);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nombre, apellido, clave, cedula, direccion, email, telefono, rols);
-    }
-
 }

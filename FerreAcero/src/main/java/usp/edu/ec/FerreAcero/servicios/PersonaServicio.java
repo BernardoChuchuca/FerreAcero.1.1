@@ -48,7 +48,7 @@ public class PersonaServicio {
     }
 
 
-    public void delete(int codigo){personaRespositorio.deleteById(codigo);
+    public void delete(int id){personaRespositorio.deleteById(id);
 
 
     }
