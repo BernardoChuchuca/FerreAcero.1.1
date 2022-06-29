@@ -17,6 +17,17 @@ public class Crear_Persona {
     private String email;
     @JsonProperty
     private String telefono;
+    @JsonProperty
+    private String tipo;
+
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
 
     public String getNombre() {
         return nombre;

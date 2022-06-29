@@ -62,6 +62,7 @@ public class PersonaControlador {
         persona.setClave(crear_persona.getClave());
         persona.setDireccion(crear_persona.getDireccion());
         persona.setTelefono(crear_persona.getTelefono());
+        persona.setTipo(crear_persona.getTipo());
         personaServicio.save(persona);
 
         return ResponseEntity.ok(persona);
@@ -102,16 +103,17 @@ public class PersonaControlador {
         personae.setDireccion(actualizarPersona.getDireccion());
         personae.setClave(actualizarPersona.getClave());
         personae.setEmail(actualizarPersona.getEmail());
+        personae.setTipo(actualizarPersona.getTipo());
         personaServicio.save(personae);
 
         return ResponseEntity.ok("Persona Actulizada");
     }
 
-    @DeleteMapping("/persona/delete/{codigo}")
+    @DeleteMapping("/persona/delete/{id}")
 
-    public ResponseEntity<String>deletepersona(@PathVariable int codigo){
+    public ResponseEntity<String>deletepersona(@PathVariable int id){
 
-        personaServicio.delete(codigo);
+        personaServicio.delete(id);
 
         return ResponseEntity.ok("Persona Eliminada");
 
