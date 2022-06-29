@@ -34,7 +34,7 @@ public class PersonaControlador {
 
     @GetMapping("{codigo}/nombre")
 
-    public ResponseEntity<String> Consulta (@PathVariable long codigo){
+    public ResponseEntity<String> Consulta (@PathVariable int codigo){
         String nombre = personaServicio.ConsultaDatos(codigo);
 
         return new ResponseEntity<String>(nombre,HttpStatus.OK);
@@ -57,8 +57,11 @@ public class PersonaControlador {
         Persona persona = new Persona();
         persona.setCedula(crear_persona.getCedula());
         persona.setNombre(crear_persona.getNombre());
-        persona.setApellidos(crear_persona.getApellidos());
-        persona.setEdad(crear_persona.getEdad());
+        persona.setApellido(crear_persona.getApellido());
+        persona.setEmail(crear_persona.getEmail());
+        persona.setClave(crear_persona.getClave());
+        persona.setDireccion(crear_persona.getDireccion());
+        persona.setTelefono(crear_persona.getTelefono());
         personaServicio.save(persona);
 
         return ResponseEntity.ok(persona);
@@ -79,7 +82,7 @@ public class PersonaControlador {
     @PutMapping("/persona/update")
     public ResponseEntity<String>updatePersona(@RequestBody ActualizarPersona actualizarPersona) {
 
-        Optional<Persona> personaOptional = personaServicio.findByCodigo(actualizarPersona.getCodigo());
+        Optional<Persona> personaOptional = personaServicio.findByCodigo(actualizarPersona.getId());
 
         if (personaOptional.isEmpty()) {
 
@@ -91,11 +94,14 @@ public class PersonaControlador {
 
         Persona personae=personaOptional.get();
 
-        personae.setCodigo(actualizarPersona.getCodigo());
+        personae.setId(actualizarPersona.getId());
         personae.setNombre(actualizarPersona.getNombre());
-        personae.setApellidos(actualizarPersona.getApellidos());
+        personae.setApellido(actualizarPersona.getApellido());
         personae.setCedula(actualizarPersona.getCedula());
-        personae.setEdad(actualizarPersona.getEdad());
+        personae.setTelefono(actualizarPersona.getTelefono());
+        personae.setDireccion(actualizarPersona.getDireccion());
+        personae.setClave(actualizarPersona.getClave());
+        personae.setEmail(actualizarPersona.getEmail());
         personaServicio.save(personae);
 
         return ResponseEntity.ok("Persona Actulizada");
@@ -103,7 +109,7 @@ public class PersonaControlador {
 
     @DeleteMapping("/persona/delete/{codigo}")
 
-    public ResponseEntity<String>deletepersona(@PathVariable long codigo){
+    public ResponseEntity<String>deletepersona(@PathVariable int codigo){
 
         personaServicio.delete(codigo);
 

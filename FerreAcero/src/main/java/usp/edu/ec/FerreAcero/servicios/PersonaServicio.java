@@ -19,7 +19,7 @@ public class PersonaServicio {
         return (List<Persona>)personaRespositorio.findAll() ;
     }
 
-    public String ConsultaDatos(long codigo){
+    public String ConsultaDatos(int codigo){
 
 
         return (String) personaRespositorio.findPersonaByCodigo(codigo);
@@ -39,7 +39,7 @@ public class PersonaServicio {
     }
 
 
-    public Optional<Persona> findByCodigo(long codigo){
+    public Optional<Persona> findByCodigo(int codigo){
 
 
 
@@ -48,7 +48,7 @@ public class PersonaServicio {
     }
 
 
-    public void delete(long codigo){personaRespositorio.deleteById(codigo);
+    public void delete(int codigo){personaRespositorio.deleteById(codigo);
 
 
     }

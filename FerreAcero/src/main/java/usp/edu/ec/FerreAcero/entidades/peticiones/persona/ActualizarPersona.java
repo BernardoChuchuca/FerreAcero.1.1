@@ -5,30 +5,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ActualizarPersona {
 
     @JsonProperty
-    private long codigo;
-    @JsonProperty
-    private String cedula;
+    private int id;
     @JsonProperty
     private String nombre;
     @JsonProperty
-    private String apellidos;
+    private String apellido;
     @JsonProperty
-    private int edad;
+    private String clave;
+    @JsonProperty
+    private String cedula;
+    @JsonProperty
+    private String direccion;
+    @JsonProperty
+    private String email;
+    @JsonProperty
+    private String telefono;
 
-    public long getCodigo() {
-        return codigo;
+
+    public int getId() {
+        return id;
     }
 
-    public void setCodigo(long codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -39,19 +38,53 @@ public class ActualizarPersona {
         this.nombre = nombre;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public int getEdad() {
-        return edad;
+    public String getClave() {
+        return clave;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 }
+
+

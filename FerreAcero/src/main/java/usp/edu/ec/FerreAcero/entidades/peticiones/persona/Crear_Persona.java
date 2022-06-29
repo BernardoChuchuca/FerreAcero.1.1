@@ -4,21 +4,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Crear_Persona {
     @JsonProperty
+    private String  nombre;
+    @JsonProperty
+    private String apellido;
+    @JsonProperty
+    private String clave;
+    @JsonProperty
     private String cedula;
     @JsonProperty
-    private String nombre;
+    private String direccion;
     @JsonProperty
-    private String apellidos;
+    private String email;
     @JsonProperty
-    private int edad;
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
+    private String telefono;
 
     public String getNombre() {
         return nombre;
@@ -28,19 +26,51 @@ public class Crear_Persona {
         this.nombre = nombre;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public int getEdad() {
-        return edad;
+    public String getClave() {
+        return clave;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 }

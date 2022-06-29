@@ -1,5 +1,7 @@
 package usp.edu.ec.FerreAcero.entidades;
 
+import usp.edu.ec.FerreAcero.entidades.peticiones.persona.Rols;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -9,83 +11,130 @@ public class Persona {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long codigo;
+    private int id;
 
+    private String  nombre;
+    private String apellido;
+    private String clave;
     private String cedula;
-    private String nombre;
-    private String apellidos;
+    private String direccion;
+    private String email;
+    private String telefono;
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "persona", cascade = CascadeType.ALL)
+    private Rols rols;
 
-    private int edad;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "persona",cascade = CascadeType.ALL)
-
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public int getId() {
+        return id;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public void setCodigo(long codigo) {
-        this.codigo = codigo;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public long getCodigo() {
-        return codigo;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public String getCedula() {
-        return cedula;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
         return nombre;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
+    public String getApellido() {
+        return apellido;
+    }
 
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public Rols getRols() {
+        return rols;
+    }
+
+    public void setRols(Rols rols) {
+        this.rols = rols;
+    }
+
+    public Persona(int id, String nombre, String apellido, String clave, String cedula, String direccion, String email, String telefono, Rols rols) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.clave = clave;
+        this.cedula = cedula;
+        this.direccion = direccion;
+        this.email = email;
+        this.telefono = telefono;
+        this.rols = rols;
+    }
+    public Persona(){
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", clave='" + clave + '\'' +
+                ", cedula='" + cedula + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", email='" + email + '\'' +
+                ", telefono='" + telefono + '\'' +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Persona)) return false;
         Persona persona = (Persona) o;
-        return codigo == persona.codigo && edad == persona.edad && Objects.equals(cedula, persona.cedula) && Objects.equals(nombre, persona.nombre) && Objects.equals(apellidos, persona.apellidos);
+        return id == persona.id && Objects.equals(nombre, persona.nombre) && Objects.equals(apellido, persona.apellido) && Objects.equals(clave, persona.clave) && Objects.equals(cedula, persona.cedula) && Objects.equals(direccion, persona.direccion) && Objects.equals(email, persona.email) && Objects.equals(telefono, persona.telefono) && Objects.equals(rols, persona.rols);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(codigo, cedula, nombre, apellidos, edad);
+        return Objects.hash(id, nombre, apellido, clave, cedula, direccion, email, telefono, rols);
     }
 
-    @Override
-    public String toString() {
-        return "Persona{" +
-                "codigo=" + codigo +
-                ", cedula='" + cedula + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", edad=" + edad +
-                '}';
-    }
 }
