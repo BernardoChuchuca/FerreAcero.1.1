@@ -18,7 +18,7 @@ public class Sucursal implements Serializable {
     private String longitud;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "sucursal",cascade = CascadeType.ALL)
-    @JsonIgnore
+
     private List<Producto> productos;
 
     public Sucursal() {

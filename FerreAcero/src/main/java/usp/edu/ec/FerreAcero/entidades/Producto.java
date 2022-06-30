@@ -1,5 +1,6 @@
 package usp.edu.ec.FerreAcero.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import usp.edu.ec.FerreAcero.entidades.Categoria;
 import usp.edu.ec.FerreAcero.entidades.Sucursal;
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class Producto implements Serializable {
     private Categoria categoria;
     @ManyToOne
     @JoinColumn
+    @JsonIgnore
     private Sucursal sucursal;
 
     public Producto(String nombre, String marca, double precio, int stock, Categoria categoria, Sucursal sucursal) {

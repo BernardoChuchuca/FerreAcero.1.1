@@ -22,8 +22,6 @@ public class CarritoControlador {
 
     private PersonaServicio personaServicio;
 
-@RestController
-public class CarritoControlador {
 
     private CarritoServicio carritoservicio;
     @Autowired
