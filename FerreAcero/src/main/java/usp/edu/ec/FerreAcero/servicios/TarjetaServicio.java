@@ -2,11 +2,9 @@ package usp.edu.ec.FerreAcero.servicios;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-<<<<<<< HEAD
+
 import usp.edu.ec.FerreAcero.entidades.Carrito;
-=======
 import usp.edu.ec.FerreAcero.entidades.FormaPago;
->>>>>>> 84cb045c96dc0b902b587e11adf5a798a987e228
 import usp.edu.ec.FerreAcero.entidades.Persona;
 import usp.edu.ec.FerreAcero.entidades.Producto;
 import usp.edu.ec.FerreAcero.entidades.TarjetaCredito;
@@ -26,7 +24,6 @@ public class TarjetaServicio {
 
         return (List<TarjetaCredito>)tarjetaRepositorio.findAll() ;
     }
-<<<<<<< HEAD
 
     public TarjetaCredito consultaDatos(String numeroTarjeta){
 
@@ -63,11 +60,9 @@ public class TarjetaServicio {
 
     }
 
-=======
     public Optional<TarjetaCredito> findByCodigo(int codigo) {
         return (Optional<TarjetaCredito>) tarjetaRepositorio.findById(codigo);
     }
->>>>>>> 84cb045c96dc0b902b587e11adf5a798a987e228
 
 }
 

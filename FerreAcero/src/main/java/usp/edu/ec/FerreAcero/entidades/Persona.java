@@ -4,16 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 84cb045c96dc0b902b587e11adf5a798a987e228
 import java.util.List;
 
 import java.io.Serializable;
 
-<<<<<<< HEAD
-=======
 import java.util.List;
 
 import java.io.Serializable;
@@ -21,7 +15,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.io.Serializable;
 
->>>>>>> 84cb045c96dc0b902b587e11adf5a798a987e228
 import java.util.Objects;
 
 @Entity
