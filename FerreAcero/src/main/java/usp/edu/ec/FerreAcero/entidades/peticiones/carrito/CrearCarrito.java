@@ -14,6 +14,8 @@ public class CrearCarrito {
     private double subtotal;
     @JsonProperty
     private double total;
+    @JsonProperty
+    private int persona_id;
 
     public int getNumero() {
         return numero;
@@ -45,5 +47,13 @@ public class CrearCarrito {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public int getPersona_id() {
+        return persona_id;
+    }
+
+    public void setPersona_id(int persona_id) {
+        this.persona_id = persona_id;
     }
 }

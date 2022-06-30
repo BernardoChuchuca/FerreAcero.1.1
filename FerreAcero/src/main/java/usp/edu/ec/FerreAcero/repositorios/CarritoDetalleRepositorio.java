@@ -10,4 +10,6 @@ public interface CarritoDetalleRepositorio extends CrudRepository<CarritoDetalle
     @Query("select d from CarritoDetalle d where d.id = :id")
     CarritoDetalle findCarritoDetalleById(int id);
 
+
+
 }

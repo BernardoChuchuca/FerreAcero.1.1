@@ -14,6 +14,5 @@ public interface CarritoRepositorio extends CrudRepository<Carrito, Integer> {
     @Query("Select c from Carrito c where c.numero = :numero")
     Carrito findCarritoByNumero(int numero);
 
-    @Query("Select p from Persona p where p.cedula = :cedula")
-    Persona findPersonaByCedula(String cedula);
+
 }
