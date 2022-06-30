@@ -32,5 +32,15 @@ public class CarritoControlador {
         return new ResponseEntity<List<Carrito>>(listaCarrito, HttpStatus.OK);
     }
 
+  @PostMapping("carrito/create")
+    public ResponseEntity<Carrito> crearPersona(@RequestBody CrearCarrito crearCarrito){
+        Carrito carrito = new Carrito();
+        carrito.setNumero(crearCarrito.getNumero());
+        carrito.setFecha(crearCarrito.getFecha());
+        carritoServicio.save(carrito);
+
+        return ResponseEntity.ok(carrito);
+
+  }
 
 }
