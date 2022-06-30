@@ -3,11 +3,11 @@ package usp.edu.ec.FerreAcero.entidades;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-<<<<<<< HEAD
+
 import java.util.List;
-=======
+
 import java.io.Serializable;
->>>>>>> b0f89427251a6cea75b56c36d8bafcad2467c7ad
+
 import java.util.Objects;
 
 @Entity
