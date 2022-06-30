@@ -104,6 +104,5 @@ public class FormaPagoControlador {
 
         return ResponseEntity.ok("FormaPago Eliminada");
 
-
     }
 }

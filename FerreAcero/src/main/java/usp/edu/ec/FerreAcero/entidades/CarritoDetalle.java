@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
 public class CarritoDetalle implements Serializable {
 
     @Id
