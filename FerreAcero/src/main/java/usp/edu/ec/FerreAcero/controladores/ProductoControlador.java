@@ -4,36 +4,55 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import usp.edu.ec.FerreAcero.entidades.Persona;
-import usp.edu.ec.FerreAcero.entidades.peticiones.persona.ActualizarPersona;
-import usp.edu.ec.FerreAcero.entidades.peticiones.persona.Crear_Persona;
-import usp.edu.ec.FerreAcero.servicios.PersonaExeption;
-import usp.edu.ec.FerreAcero.servicios.PersonaServicio;
+import usp.edu.ec.FerreAcero.entidades.Producto;
+
+import usp.edu.ec.FerreAcero.servicios.ProductoExeption;
+import usp.edu.ec.FerreAcero.servicios.ProductoServicio;
 
 import java.util.List;
 import java.util.Optional;
-
 @RestController
-public class PersonaControlador {
+public class ProductoControlador {
 
-    private PersonaServicio personaServicio;
+    private ProductoServicio productoServicio;
 
     @Autowired
-    public void setPersonaServicio(PersonaServicio personaServicio) {
+    public void setProductoServicio(ProductoServicio productoServicio) {
 
-        this.personaServicio = personaServicio;
+        this.productoServicio = productoServicio;
     }
 
-    @GetMapping("/personas")
-    public ResponseEntity<List<Persona>> getAllPersona(){
+    @GetMapping("/productos")
+    public ResponseEntity<List<Producto>>getAllProducto(){
 
-        List<Persona> listaPersona=personaServicio.findAll();
+        List<Producto> listaProducto=productoServicio.findAll();
 
-        return new ResponseEntity<List<Persona>>(listaPersona, HttpStatus.OK);
+
+        return  new ResponseEntity<List<Producto>>(listaProducto,HttpStatus.OK);
+
+    }
+    @GetMapping("/producto/{nombre}")
+
+    public ResponseEntity<Producto> getProductoNombre (@PathVariable String nombre) throws ProductoExeption {
+        Optional<Producto> producto = Optional.ofNullable(productoServicio.ConsultaDatosP(nombre));
+        Producto persona1=producto.orElseThrow(ProductoExeption::new);
+
+        return new ResponseEntity<Producto>(persona1,HttpStatus.OK);
 
     }
 
-    @GetMapping("{codigo}/nombre")
+    @GetMapping("/producto/codigo/{id}")
+
+    public ResponseEntity<Producto> getProductoID (@PathVariable int id) throws ProductoExeption {
+        Optional<Producto> producto = Optional.ofNullable(productoServicio.ConsultaDatos(id));
+        Producto producto1=producto.orElseThrow(ProductoExeption::new);
+
+        return new ResponseEntity<Producto>(producto1,HttpStatus.OK);
+
+    }
+
+
+    /*@GetMapping("{codigo}/nombre")
 
     public ResponseEntity<String> Consulta (@PathVariable int codigo){
         String nombre = personaServicio.ConsultaDatos(codigo);
@@ -41,16 +60,8 @@ public class PersonaControlador {
         return new ResponseEntity<String>(nombre,HttpStatus.OK);
 
     }
+/*
 
-    @GetMapping("/persona/{cedula}")
-
-    public ResponseEntity<Persona> getPersona (@PathVariable String cedula) throws PersonaExeption {
-        Optional<Persona> persona = Optional.ofNullable(personaServicio.ConsultaDatosP(cedula));
-        Persona persona1=persona.orElseThrow(PersonaExeption::new);
-
-        return new ResponseEntity<Persona>(persona1,HttpStatus.OK);
-
-    }
 
 
     @PostMapping("/persona/create")
@@ -79,7 +90,7 @@ public class PersonaControlador {
 
         return new ResponseEntity<Persona>(persona,HttpStatus.OK);
 
-    }*/
+    }
 
     @PutMapping("/persona/update")
     public ResponseEntity<String>updatePersona(@RequestBody ActualizarPersona actualizarPersona) {
@@ -119,7 +130,6 @@ public class PersonaControlador {
         return ResponseEntity.ok("Persona Eliminada");
 
 
-    }
+    }*/
 
 }
-
