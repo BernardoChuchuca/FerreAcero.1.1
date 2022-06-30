@@ -2,6 +2,7 @@ package usp.edu.ec.FerreAcero.servicios;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import usp.edu.ec.FerreAcero.entidades.FormaPago;
 import usp.edu.ec.FerreAcero.entidades.Persona;
 import usp.edu.ec.FerreAcero.entidades.TarjetaCredito;
 import usp.edu.ec.FerreAcero.repositorios.PersonaRespositorio;
@@ -20,7 +21,9 @@ public class TarjetaServicio {
 
         return (List<TarjetaCredito>)tarjetaRepositorio.findAll() ;
     }
-
+    public Optional<TarjetaCredito> findByCodigo(int codigo) {
+        return (Optional<TarjetaCredito>) tarjetaRepositorio.findById(codigo);
+    }
 
 }
 

@@ -3,11 +3,11 @@ package usp.edu.ec.FerreAcero.entidades;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-<<<<<<< HEAD
+
 import java.util.List;
-=======
+
 import java.io.Serializable;
->>>>>>> b0f89427251a6cea75b56c36d8bafcad2467c7ad
+
 import java.util.Objects;
 
 @Entity
@@ -30,6 +30,10 @@ public class Persona implements Serializable {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "persona", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<TarjetaCredito> tarjetaCredito;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "persona", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<FormaPago> formapago;
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
