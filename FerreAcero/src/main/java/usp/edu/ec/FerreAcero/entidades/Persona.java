@@ -3,7 +3,11 @@ package usp.edu.ec.FerreAcero.entidades;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+<<<<<<< HEAD
+import java.util.List;
+=======
 import java.io.Serializable;
+>>>>>>> b0f89427251a6cea75b56c36d8bafcad2467c7ad
 import java.util.Objects;
 
 @Entity
@@ -22,6 +26,10 @@ public class Persona implements Serializable {
     private String telefono;
 
     private String tipo;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "persona", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<TarjetaCredito> tarjetaCredito;
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
@@ -97,7 +105,7 @@ public class Persona implements Serializable {
 
 
 
-    public Persona(int id, String nombre, String apellido, String clave, String cedula, String direccion, String email, String telefono) {
+    public Persona(int id, String nombre, String apellido, String clave, String cedula, String direccion, String email, String telefono, TarjetaCredito tarjetaCredito) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -106,6 +114,7 @@ public class Persona implements Serializable {
         this.direccion = direccion;
         this.email = email;
         this.telefono = telefono;
+
 
     }
     public Persona(){
