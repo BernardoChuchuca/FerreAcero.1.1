@@ -28,6 +28,14 @@ public class FormaPagoControlador {
 
         this.formapagoServicio = formapagoServicio;
     }
+    @Autowired
+    public void setPersonaServicio(PersonaServicio personaServicio) {
+        this.personaServicio = personaServicio;
+    }
+    @Autowired
+    public void setTarjetaServicio(TarjetaServicio tarjetaServicio) {
+        this.tarjetaServicio = tarjetaServicio;
+    }
 
     @GetMapping("/formaspago")
     public ResponseEntity<List<FormaPago>> getAllFormaPago(){

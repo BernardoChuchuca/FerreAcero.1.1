@@ -1,12 +1,13 @@
 package usp.edu.ec.FerreAcero.servicios;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import usp.edu.ec.FerreAcero.entidades.Carrito;
 import usp.edu.ec.FerreAcero.repositorios.CarritoRepositorio;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class CarritoServicio {
 
     @Autowired
