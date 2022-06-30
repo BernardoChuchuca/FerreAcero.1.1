@@ -11,6 +11,10 @@ public class ActualizarCarrito {
     private int numero;
     @JsonProperty
     private Date fecha;
+    @JsonProperty
+    private double subtotal;
+    @JsonProperty
+    private double total;
 
     public int getId() {
         return id;
@@ -34,5 +38,21 @@ public class ActualizarCarrito {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 }

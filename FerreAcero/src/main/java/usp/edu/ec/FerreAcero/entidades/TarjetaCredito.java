@@ -2,8 +2,11 @@ package usp.edu.ec.FerreAcero.entidades;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class TarjetaCredito implements Serializable {
@@ -15,7 +18,9 @@ public class TarjetaCredito implements Serializable {
     private int CCV;
     private String  FechaExp;
 
-
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tarjetacredito", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<FormaPago> formapago;
 
     @ManyToOne
     @JoinColumn
