@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import usp.edu.ec.FerreAcero.entidades.FormaPago;
+import usp.edu.ec.FerreAcero.entidades.Persona;
 import usp.edu.ec.FerreAcero.entidades.Sucursal;
 import usp.edu.ec.FerreAcero.servicios.FormaPagoExeption;
 import usp.edu.ec.FerreAcero.servicios.SucursalException;
 import usp.edu.ec.FerreAcero.servicios.SucursalServicio;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -24,6 +26,14 @@ public class SucursalControlador {
         this.sucursalServicio = sucursalServicio;
     }
 
+    @GetMapping("/sucursales")
+    public ResponseEntity<List<Sucursal>> getAllSucursal(){
+
+        List<Sucursal> listaSucursal=sucursalServicio.findAll();
+
+        return new ResponseEntity<List<Sucursal>>(listaSucursal, HttpStatus.OK);
+
+    }
     @GetMapping("sucursal/nombre/{sucursal}")
 
     public ResponseEntity<Sucursal> getSucursal(@PathVariable String sucursal) throws SucursalException {
