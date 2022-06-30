@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "FormaPago")
 public class FormaPago implements Serializable {
 
     @Id

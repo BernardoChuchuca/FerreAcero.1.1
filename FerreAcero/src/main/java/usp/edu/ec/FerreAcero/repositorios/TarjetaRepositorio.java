@@ -7,15 +7,21 @@ import usp.edu.ec.FerreAcero.entidades.TarjetaCredito;
 
 public interface TarjetaRepositorio extends CrudRepository<TarjetaCredito, Integer> {
 
-    @Query("Select t from TarjetaCredito t where t.CCV= :CCV")
-    TarjetaCredito findTarjetaCreditoByCodigo(int CCV);
+    @Query("Select t from TarjetaCredito t where t.id= :id")
+    TarjetaCredito findTarjetaCreditoById(int id);
 
 
-    @Query("Select t from TarjetaCredito t where t.tipoTarjeta= :tipoTarjeta")
-    TarjetaCredito findTarjetaCreditoByTipoTarjeta(String tipoTarjeta);
+    @Query("Select t from TarjetaCredito t where t.NumeroTarjeta= :numeroTarjeta")
+    TarjetaCredito findTarjetaCreditoByNumeroTarjeta(String numeroTarjeta);
 
-    @Query("Delete from TarjetaCredito t where t.id= :id")
-    Persona deletePersonaByCedula(int id);
+
+
+
+
+
+
+
+
 
 
 }

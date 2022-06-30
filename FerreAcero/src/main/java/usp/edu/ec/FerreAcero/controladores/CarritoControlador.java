@@ -22,11 +22,13 @@ public class CarritoControlador {
 
     private PersonaServicio personaServicio;
 
+@RestController
+public class CarritoControlador {
+
+    private CarritoServicio carritoservicio;
     @Autowired
-    public void setCarritoServicio(CarritoServicio carritoServicio){
-
-        this.carritoServicio = carritoServicio;
-
+    public void setCarritoservicio(CarritoServicio carritoservicio) {
+        this.carritoservicio = carritoservicio;
     }
     @Autowired
     public void setPersonaServicio(PersonaServicio personaServicio) {
@@ -36,7 +38,7 @@ public class CarritoControlador {
     @GetMapping("/carritos")
     public ResponseEntity<List<Carrito>> getAllCarrito(){
 
-        List<Carrito> listaCarrito=carritoServicio.findAll();
+        List<Carrito> listaCarrito=carritoservicio.findAll();
 
         return new ResponseEntity<List<Carrito>>(listaCarrito, HttpStatus.OK);
     }
@@ -62,6 +64,7 @@ public class CarritoControlador {
         carrito.setFecha(crearCarrito.getFecha());
         carrito.setPersona(persona.get());
         carritoServicio.save(carrito);
+        carritoservicio.save(carrito);
 
         return ResponseEntity.ok(carrito);
 
