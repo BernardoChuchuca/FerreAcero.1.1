@@ -3,6 +3,7 @@ package usp.edu.ec.FerreAcero.entidades;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +22,10 @@ public class Persona {
     private String telefono;
 
     private String tipo;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "persona", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<TarjetaCredito> tarjetaCredito;
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
@@ -96,7 +101,7 @@ public class Persona {
 
 
 
-    public Persona(int id, String nombre, String apellido, String clave, String cedula, String direccion, String email, String telefono) {
+    public Persona(int id, String nombre, String apellido, String clave, String cedula, String direccion, String email, String telefono, TarjetaCredito tarjetaCredito) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -105,6 +110,7 @@ public class Persona {
         this.direccion = direccion;
         this.email = email;
         this.telefono = telefono;
+
 
     }
     public Persona(){
