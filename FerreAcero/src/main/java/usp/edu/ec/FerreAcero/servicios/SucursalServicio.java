@@ -15,6 +15,7 @@ public class SucursalServicio {
     private SucursalRepositorio sucursalRepositorio;
 
     public List<Sucursal> findAll(){
+
         return (List<Sucursal>)sucursalRepositorio.findAll() ;
     }
 
