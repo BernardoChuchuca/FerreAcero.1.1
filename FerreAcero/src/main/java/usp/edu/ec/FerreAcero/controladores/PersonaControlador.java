@@ -33,6 +33,9 @@ public class PersonaControlador {
 
     }
 
+
+
+
     @GetMapping("{codigo}/nombre")
 
     public ResponseEntity<String> Consulta (@PathVariable int codigo){
@@ -60,10 +63,10 @@ public class PersonaControlador {
         persona.setNombre(crear_persona.getNombre());
         persona.setApellido(crear_persona.getApellido());
         persona.setEmail(crear_persona.getEmail());
-        persona.setClave(crear_persona.getClave());
         persona.setDireccion(crear_persona.getDireccion());
         persona.setTelefono(crear_persona.getTelefono());
         persona.setTipo(crear_persona.getTipo());
+
         personaServicio.save(persona);
 
         return ResponseEntity.ok(persona);
@@ -102,7 +105,6 @@ public class PersonaControlador {
         personae.setCedula(actualizarPersona.getCedula());
         personae.setTelefono(actualizarPersona.getTelefono());
         personae.setDireccion(actualizarPersona.getDireccion());
-        personae.setClave(actualizarPersona.getClave());
         personae.setEmail(actualizarPersona.getEmail());
         personae.setTipo(actualizarPersona.getTipo());
         personaServicio.save(personae);

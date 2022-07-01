@@ -40,6 +40,17 @@ public class TarjetaControlador {
 
         return new ResponseEntity<List<TarjetaCredito>>(listaTarjeta, HttpStatus.OK);
     }
+
+
+
+    @GetMapping("/TarjetaCredito/numero/{cedula}")
+    public ResponseEntity<List<TarjetaCredito>> getAllTarjetaNumero(@PathVariable String cedula){
+
+        List<TarjetaCredito> listaTarjeta=new Gestion().listatajetas(tarjetaServicio.findAll(),cedula);
+
+
+        return new ResponseEntity<List<TarjetaCredito>>(listaTarjeta, HttpStatus.OK);
+    }
 /*
     @GetMapping("{TarjetaCredito}/numeroTarjeta")
 

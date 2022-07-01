@@ -6,8 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import usp.edu.ec.FerreAcero.entidades.Producto;
 
+import usp.edu.ec.FerreAcero.entidades.Sucursal;
 import usp.edu.ec.FerreAcero.servicios.ProductoExeption;
 import usp.edu.ec.FerreAcero.servicios.ProductoServicio;
+import usp.edu.ec.FerreAcero.servicios.SucursalServicio;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,10 +18,17 @@ public class ProductoControlador {
 
     private ProductoServicio productoServicio;
 
+    private SucursalServicio sucursalServicio;
+
     @Autowired
     public void setProductoServicio(ProductoServicio productoServicio) {
 
         this.productoServicio = productoServicio;
+    }
+
+    @Autowired
+    public void setSucursalServicio(SucursalServicio sucursalServicio) {
+        this.sucursalServicio = sucursalServicio;
     }
 
     @GetMapping("/productos")
@@ -38,6 +47,16 @@ public class ProductoControlador {
         Producto persona1=producto.orElseThrow(ProductoExeption::new);
 
         return new ResponseEntity<Producto>(persona1,HttpStatus.OK);
+
+    }
+
+    @GetMapping("/producto/{nombreSucursal}")
+
+    public ResponseEntity<Producto> getProductoSucursal (@PathVariable String nombreSucursal) throws ProductoExeption {
+        Sucursal sucursal1 = sucursalServicio.ConsultaDatosP(nombreSucursal);
+        Producto producto1 = productoServicio.ConsultaP(sucursal1.getId());
+
+        return new ResponseEntity<Producto>(producto1,HttpStatus.OK);
 
     }
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import usp.edu.ec.FerreAcero.entidades.Persona;
 import usp.edu.ec.FerreAcero.entidades.Producto;
+import usp.edu.ec.FerreAcero.entidades.Sucursal;
 import usp.edu.ec.FerreAcero.repositorios.PersonaRespositorio;
 import usp.edu.ec.FerreAcero.repositorios.ProductoRespositorio;
 
@@ -32,6 +33,14 @@ public class ProductoServicio {
 
         return (Producto) productoRespositorio.findProductoByNombre(nombre);
     }
+
+
+
+    public Producto ConsultaP(int productoId){
+        return (Producto) productoRespositorio.findProductoBySucursalId(productoId);
+    }
+
+
 
     public void save(Producto producto){
 
