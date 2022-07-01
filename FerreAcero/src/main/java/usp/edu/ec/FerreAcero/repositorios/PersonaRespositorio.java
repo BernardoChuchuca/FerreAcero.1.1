@@ -16,4 +16,9 @@ public interface PersonaRespositorio extends CrudRepository<Persona, Integer> {
 
     @Query("Delete from Persona p where p.id= :id")
     Persona deletePersonaByCedula(int id);
+
+
+
+
+
 }

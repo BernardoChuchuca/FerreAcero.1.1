@@ -7,8 +7,7 @@ public class Crear_Persona {
     private String  nombre;
     @JsonProperty
     private String apellido;
-    @JsonProperty
-    private String clave;
+
     @JsonProperty
     private String cedula;
     @JsonProperty
@@ -17,17 +16,17 @@ public class Crear_Persona {
     private String email;
     @JsonProperty
     private String telefono;
+
+
     @JsonProperty
     private String tipo;
 
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
 
-    public String getTipo() {
-        return tipo;
-    }
+
+
+
+
 
     public String getNombre() {
         return nombre;
@@ -45,13 +44,7 @@ public class Crear_Persona {
         this.apellido = apellido;
     }
 
-    public String getClave() {
-        return clave;
-    }
 
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
 
     public String getCedula() {
         return cedula;
@@ -83,5 +76,13 @@ public class Crear_Persona {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return tipo;
     }
 }
