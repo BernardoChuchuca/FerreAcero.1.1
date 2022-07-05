@@ -91,6 +91,27 @@ public class Gestion {
     }
 
 
+    public  List<Producto> productoCate911 (Categoria categoria,List<Producto> listasPC){
+        List<Producto> nombresPC = new ArrayList<>();
+
+        for (int i=0; i < listasPC.size();i++){
+            if (categoria.getId()==listasPC.get(i).getCategoria().getId()){
+
+                Producto p2 = new Producto();
+
+                p2.setNombre(listasPC.get(i).getNombre());
+                p2.setMarca(listasPC.get(i).getMarca());
+                p2.setPrecio(listasPC.get(i).getPrecio());
+
+                nombresPC.add(p2);
+
+            }
+
+        }
+
+        return nombresPC;
+    }
+
     public String CalcularDistancia(Sucursal sucursal2, Direccion dir) {
 
         double latS=Double.parseDouble(sucursal2.getLatitud());
