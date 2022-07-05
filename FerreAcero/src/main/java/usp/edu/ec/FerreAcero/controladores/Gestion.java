@@ -134,11 +134,6 @@ public class Gestion {
     }
 
 
-    public List<String> sucurProducto2(Sucursal sucursal, List<Producto> listasP2) {
-        List<String> nombresP2 = new ArrayList<>();
-
-        for (int i = 0; i < listasP2.size(); i++) {
-            if (sucursal.getId() == listasP2.get(i).getSucursal().getId()) {
 
 
 
