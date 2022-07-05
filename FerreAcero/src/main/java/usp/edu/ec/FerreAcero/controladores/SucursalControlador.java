@@ -47,9 +47,6 @@ public class SucursalControlador {
         return new ResponseEntity<List<Sucursal>>(listaSucursal, HttpStatus.OK);
 
     }
-    @GetMapping("sucursal/nombre/{sucursal}")
-
-
 
     @GetMapping("/sucursalLista")
     public ResponseEntity<List<String>> getAllCategoria(){

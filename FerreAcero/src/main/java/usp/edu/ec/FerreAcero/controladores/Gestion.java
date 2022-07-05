@@ -1,12 +1,7 @@
 package usp.edu.ec.FerreAcero.controladores;
 
 
-import usp.edu.ec.FerreAcero.entidades.Persona;
-import usp.edu.ec.FerreAcero.entidades.TarjetaCredito;
-
-import usp.edu.ec.FerreAcero.entidades.Categoria;
-import usp.edu.ec.FerreAcero.entidades.Producto;
-import usp.edu.ec.FerreAcero.entidades.Sucursal;
+import usp.edu.ec.FerreAcero.entidades.*;
 
 
 import java.util.ArrayList;
@@ -92,4 +87,21 @@ public class Gestion {
     }
 
 
+    public String CalcularDistancia(Sucursal sucursal2, Direccion dir) {
+
+        double latS=Double.parseDouble(sucursal2.getLatitud());
+        double lonS=Double.parseDouble(sucursal2.getLongitud());
+
+        double latD=dir.getLatitud();
+        double lonD=dir.getLongitud();
+
+        double R=6378;
+
+        double c = (Math.PI)/180;
+
+        double d=2*R*Math.asin(Math.sqrt(Math.pow(Math.sin(c*(latD-latS)/2),2)+Math.cos(c*latS)*Math.cos(c*latD)*Math.pow(Math.sin(c*(lonD-lonS)/2),2)));
+        String dis=String.valueOf(d).concat(" KM");
+        return dis;
+
+    }
 }
