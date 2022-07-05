@@ -68,26 +68,12 @@ public class PedidoControlador {
 
     @PostMapping("/pedido/crear")
     public ResponseEntity<Pedido> crearPedido(@RequestBody CrearPedido crearPedido){
-        Optional<Persona> persona = personaServicio.findByCodigo(crearPedido.getPersona_id());
-        if(persona.isEmpty()){
-            return ResponseEntity.badRequest().build();
-        }
-        Optional<Producto> producto = productoServicio.findByCodigo(crearPedido.getProducto_id());
-        if(producto.isEmpty()){
-            return ResponseEntity.badRequest().build();
-        }
-        Optional<Carrito> carrito = carritoServicio.findById(crearPedido.getCarrito_id());
-        if(carrito.isEmpty()){
-            return ResponseEntity.badRequest().build();
-        }
         Pedido pedido = new Pedido();
         pedido.setNumero(crearPedido.getNumero());
-        pedido.setPersona(persona.get());
-        pedido.setProducto(producto.stream().toList());
-        pedido.setCarrito(carrito.get());
         pedidoServicio.save(pedido);
 
         return ResponseEntity.ok(pedido);
+
     }
 
     @PutMapping("/pedido/editar")
