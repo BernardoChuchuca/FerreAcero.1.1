@@ -57,7 +57,7 @@ public class SucursalControlador {
 
     }
 
-    @GetMapping("sucursal/pro/{nombreSu}")
+    @GetMapping("sucursal/p/{nombreSu}")
 
     public ResponseEntity<List<String>> getSucursalProducto(@PathVariable String nombreSu) throws SucursalException {
         Optional<Sucursal> sucursal1 = Optional.ofNullable(sucursalServicio.ConsultaDatosP(nombreSu));
@@ -68,12 +68,9 @@ public class SucursalControlador {
     }
 
 
-    @GetMapping("sucursal/prod/{nombreSu}")
 
-    public ResponseEntity<List<String>> getSucursalProductoX(@PathVariable String nombreSu) throws SucursalException {
 
     @GetMapping("sucursal/produ/{nombreSu}")
-
     public ResponseEntity<List<String>> getSucursalProducto2(@PathVariable String nombreSu) throws SucursalException {
 
         Optional<Sucursal> sucursal1 = Optional.ofNullable(sucursalServicio.ConsultaDatosP(nombreSu));
