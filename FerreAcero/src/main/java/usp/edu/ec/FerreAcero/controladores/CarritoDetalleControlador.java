@@ -48,7 +48,7 @@ public class CarritoDetalleControlador {
         return new ResponseEntity<List<CarritoDetalle>>(listaCarritoDetalle, HttpStatus.OK);
     }
 
-    @PostMapping("carritodetalle/create")
+    @PostMapping("/carritodetalle/create")
     public ResponseEntity<CarritoDetalle> crearCarritoDetalle(@RequestBody CrearCarritoDetalle crearCarritoDetalle){
         Optional<Producto> producto = productoServicio.findByCodigo(crearCarritoDetalle.getProducto_id());
         if(producto.isEmpty()){
@@ -70,7 +70,7 @@ public class CarritoDetalleControlador {
         return ResponseEntity.ok(carritoDetalle);
     }
 
-    @PutMapping("carritodetalle/editar")
+    @PutMapping("/carritodetalle/editar")
     public ResponseEntity<String>editarCarritoDetalle(@RequestBody ActualizarCarritoDetalle actualizarCarritoDetalle){
         Optional<CarritoDetalle> carritoDetalleOptional = carritoDetalleServicio.findById(actualizarCarritoDetalle.getId());
 
@@ -86,7 +86,7 @@ public class CarritoDetalleControlador {
         return ResponseEntity.ok("Carrito Detalle Actualizado");
     }
 
-    @DeleteMapping("carritodetalle/delete/{id}")
+    @DeleteMapping("/carritodetalle/delete/{id}")
     public ResponseEntity<String>eliminarCarritoDetalle(@PathVariable int id){
         carritoDetalleServicio.delete(id);
         return ResponseEntity.ok("Carro Detalle Eliminado");
