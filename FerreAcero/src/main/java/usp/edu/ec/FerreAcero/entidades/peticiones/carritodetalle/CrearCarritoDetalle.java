@@ -13,6 +13,7 @@ public class CrearCarritoDetalle {
     @JsonProperty
     private int carrito_id;
 
+
     public double getValor_unitario() {
         return valor_unitario;
     }
@@ -44,4 +45,5 @@ public class CrearCarritoDetalle {
     public void setCarrito_id(int carrito_id) {
         this.carrito_id = carrito_id;
     }
+
 }

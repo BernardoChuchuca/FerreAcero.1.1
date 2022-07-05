@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import usp.edu.ec.FerreAcero.entidades.Carrito;
-import usp.edu.ec.FerreAcero.entidades.Pedido;
-import usp.edu.ec.FerreAcero.entidades.Persona;
-import usp.edu.ec.FerreAcero.entidades.Producto;
+import usp.edu.ec.FerreAcero.entidades.*;
 import usp.edu.ec.FerreAcero.entidades.peticiones.pedido.ActualizarPedido;
 import usp.edu.ec.FerreAcero.entidades.peticiones.pedido.CrearPedido;
 import usp.edu.ec.FerreAcero.servicios.*;
@@ -22,9 +19,10 @@ public class PedidoControlador {
 
     private PersonaServicio personaServicio;
 
-    private ProductoServicio productoServicio;
 
     private CarritoServicio carritoServicio;
+
+    private PedidoDetalleServicio pedidoDetalleServicio;
 
     @Autowired
     public void setPedidoServicio(PedidoServicio pedidoServicio) {
@@ -38,12 +36,13 @@ public class PedidoControlador {
     }
 
     @Autowired
-    public void setProductoServicio(ProductoServicio productoServicio) {
-        this.productoServicio = productoServicio;
-    }
-    @Autowired
     public void setCarritoServicio(CarritoServicio carritoServicio) {
         this.carritoServicio = carritoServicio;
+    }
+
+    @Autowired
+    public void setPedidoDetalleServicio(PedidoDetalleServicio pedidoDetalleServicio) {
+        this.pedidoDetalleServicio = pedidoDetalleServicio;
     }
 
     @GetMapping("/pedidos")
@@ -68,11 +67,34 @@ public class PedidoControlador {
 
     @PostMapping("/pedido/crear")
     public ResponseEntity<Pedido> crearPedido(@RequestBody CrearPedido crearPedido){
+
+        Optional<Persona> persona = personaServicio.findByCodigo(crearPedido.getPersona_id());
+
+        if(persona.isEmpty()){
+
+            return ResponseEntity.badRequest().build();
+
+        }
+
+        Optional<Carrito> carrito = carritoServicio.findById(crearPedido.getCarrito_id());
+
+        if(carrito.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        }
+
+        Optional<PedidoDetalle> pedidoDetalle = pedidoDetalleServicio.findById(crearPedido.getPedidodetalle_id());
+        if(pedidoDetalle.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        }
+
         Pedido pedido = new Pedido();
         pedido.setNumero(crearPedido.getNumero());
+        pedido.setPersona(persona.get());
+        pedido.setCarrito(carrito.get());
         pedidoServicio.save(pedido);
 
         return ResponseEntity.ok(pedido);
+
 
     }
 

@@ -19,14 +19,24 @@ public class PedidoDetalle {
     @JoinColumn
     private Producto producto;
 
+    @ManyToOne
+    @JoinColumn
+    private Pedido pedido;
+
+    @OneToOne
+    @JoinColumn
+    private CarritoDetalle carritoDetalle;
+
     public PedidoDetalle() {
     }
 
-    public PedidoDetalle(int id, double total, double subtotal, Producto producto) {
+    public PedidoDetalle(int id, double total, double subtotal, Producto producto, Pedido pedido, CarritoDetalle carritoDetalle) {
         this.id = id;
         this.total = total;
         this.subtotal = subtotal;
         this.producto = producto;
+        this.pedido = pedido;
+        this.carritoDetalle = carritoDetalle;
     }
 
     public int getId() {
@@ -37,8 +47,8 @@ public class PedidoDetalle {
         this.id = id;
     }
 
-    public double getTotal(double total) {
-        return this.total;
+    public double getTotal() {
+        return total;
     }
 
     public void setTotal(double total) {
@@ -61,17 +71,33 @@ public class PedidoDetalle {
         this.producto = producto;
     }
 
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public CarritoDetalle getCarritoDetalle() {
+        return carritoDetalle;
+    }
+
+    public void setCarritoDetalle(CarritoDetalle carritoDetalle) {
+        this.carritoDetalle = carritoDetalle;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PedidoDetalle that = (PedidoDetalle) o;
-        return id == that.id && Double.compare(that.total, total) == 0 && Double.compare(that.subtotal, subtotal) == 0 && producto.equals(that.producto);
+        return id == that.id && Double.compare(that.total, total) == 0 && Double.compare(that.subtotal, subtotal) == 0 && producto.equals(that.producto) && pedido.equals(that.pedido) && carritoDetalle.equals(that.carritoDetalle);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, total, subtotal, producto);
+        return Objects.hash(id, total, subtotal, producto, pedido, carritoDetalle);
     }
 
     @Override
@@ -81,6 +107,8 @@ public class PedidoDetalle {
                 ", total=" + total +
                 ", subtotal=" + subtotal +
                 ", producto=" + producto +
+                ", pedido=" + pedido +
+                ", carritoDetalle=" + carritoDetalle +
                 '}';
     }
 }

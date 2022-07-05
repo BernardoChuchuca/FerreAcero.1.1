@@ -4,10 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import usp.edu.ec.FerreAcero.entidades.CarritoDetalle;
+import usp.edu.ec.FerreAcero.entidades.Pedido;
 import usp.edu.ec.FerreAcero.entidades.PedidoDetalle;
+import usp.edu.ec.FerreAcero.entidades.Producto;
 import usp.edu.ec.FerreAcero.entidades.peticiones.pedidodetalle.ActualizarPedidoDetalle;
 import usp.edu.ec.FerreAcero.entidades.peticiones.pedidodetalle.CrearPedidoDetalle;
+import usp.edu.ec.FerreAcero.servicios.CarritoDetalleServicio;
 import usp.edu.ec.FerreAcero.servicios.PedidoDetalleServicio;
+import usp.edu.ec.FerreAcero.servicios.PedidoServicio;
 import usp.edu.ec.FerreAcero.servicios.ProductoServicio;
 
 import java.util.List;
@@ -20,6 +25,10 @@ public class PedidoDetalleControlador {
 
     private ProductoServicio productoServicio;
 
+    private CarritoDetalleServicio carritoDetalleServicio;
+
+    private PedidoServicio pedidoServicio;
+
     @Autowired
     public void setPedidoDetalleServicio(PedidoDetalleServicio pedidoDetalleServicio) {
         this.pedidoDetalleServicio = pedidoDetalleServicio;
@@ -29,6 +38,16 @@ public class PedidoDetalleControlador {
     @Autowired
     public void setProductoServicio(ProductoServicio productoServicio) {
         this.productoServicio = productoServicio;
+    }
+
+    @Autowired
+    public void setCarritoDetalleServicio(CarritoDetalleServicio carritoDetalleServicio) {
+        this.carritoDetalleServicio = carritoDetalleServicio;
+    }
+
+    @Autowired
+    public void setPedidoServicio(PedidoServicio pedidoServicio) {
+        this.pedidoServicio = pedidoServicio;
     }
 
     @GetMapping("/pedidodetalles")
@@ -43,12 +62,31 @@ public class PedidoDetalleControlador {
 
     @PostMapping("/pedidodetalle/crear")
     public ResponseEntity<PedidoDetalle> crearPedidoDetalle(@RequestBody CrearPedidoDetalle crearPedidoDetalle){
-        PedidoDetalle pedidoDetalle = new PedidoDetalle();
-        pedidoDetalle.setSubtotal(crearPedidoDetalle.getSubtotal());
-        pedidoDetalle.getTotal(crearPedidoDetalle.getTotal());
-        pedidoDetalleServicio.save(pedidoDetalle);
+       Optional<Producto> producto = productoServicio.findByCodigo(crearPedidoDetalle.getProducto_id());
+       if(producto.isEmpty()){
+           return ResponseEntity.badRequest().build();
+       }
 
-        return ResponseEntity.ok(pedidoDetalle);
+       Optional<CarritoDetalle> carritoDetalle = carritoDetalleServicio.findById(crearPedidoDetalle.getCarritodetalle_id());
+       if(carritoDetalle.isEmpty()){
+           return ResponseEntity.badRequest().build();
+       }
+
+       Optional<Pedido> pedido = pedidoServicio.findById(crearPedidoDetalle.getPedido_id()) ;
+       if(pedido.isEmpty()){
+
+           return ResponseEntity.badRequest().build();
+       }
+
+       PedidoDetalle pedidoDetalle = new PedidoDetalle();
+       pedidoDetalle.setSubtotal(crearPedidoDetalle.getSubtotal());
+       pedidoDetalle.setTotal(crearPedidoDetalle.getTotal());
+       pedidoDetalle.setPedido(pedido.get());
+       pedidoDetalle.setProducto(producto.get());
+       pedidoDetalle.setCarritoDetalle(carritoDetalle.get());
+       pedidoDetalleServicio.save(pedidoDetalle);
+
+       return ResponseEntity.ok(pedidoDetalle);
 
     }
 

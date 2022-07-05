@@ -21,22 +21,21 @@ public class Pedido {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Producto> producto;
+    private List<PedidoDetalle> pedidoDetalle;
 
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn
     private Carrito carrito;
-
 
     public Pedido() {
     }
 
-    public Pedido(int id, int numero, Persona persona, List<Producto> producto, Carrito carrito) {
+    public Pedido(int id, int numero, Persona persona, List<PedidoDetalle> pedidoDetalle, Carrito carrito) {
         this.id = id;
         this.numero = numero;
         this.persona = persona;
-        this.producto = producto;
+        this.pedidoDetalle = pedidoDetalle;
         this.carrito = carrito;
     }
 
@@ -64,12 +63,12 @@ public class Pedido {
         this.persona = persona;
     }
 
-    public List<Producto> getProducto() {
-        return producto;
+    public List<PedidoDetalle> getPedidoDetalle() {
+        return pedidoDetalle;
     }
 
-    public void setProducto(List<Producto> producto) {
-        this.producto = producto;
+    public void setPedidoDetalle(List<PedidoDetalle> pedidoDetalle) {
+        this.pedidoDetalle = pedidoDetalle;
     }
 
     public Carrito getCarrito() {
@@ -85,12 +84,12 @@ public class Pedido {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pedido pedido = (Pedido) o;
-        return id == pedido.id && numero == pedido.numero && persona.equals(pedido.persona) && producto.equals(pedido.producto) && carrito.equals(pedido.carrito);
+        return id == pedido.id && numero == pedido.numero && persona.equals(pedido.persona) && pedidoDetalle.equals(pedido.pedidoDetalle) && carrito.equals(pedido.carrito);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, numero, persona, producto, carrito);
+        return Objects.hash(id, numero, persona, pedidoDetalle, carrito);
     }
 
     @Override
@@ -99,7 +98,7 @@ public class Pedido {
                 "id=" + id +
                 ", numero=" + numero +
                 ", persona=" + persona +
-                ", producto=" + producto +
+                ", pedidoDetalle=" + pedidoDetalle +
                 ", carrito=" + carrito +
                 '}';
     }

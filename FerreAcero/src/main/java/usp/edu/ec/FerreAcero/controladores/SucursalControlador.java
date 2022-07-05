@@ -68,19 +68,6 @@ public class SucursalControlador {
     }
 
 
-
-
-
-
-
-
-        Optional<Sucursal> sucursal1 = Optional.ofNullable(sucursalServicio.ConsultaDatosP(nombreSu));
-        Sucursal sucursal2 = sucursal1.orElseThrow(FormaPagoExeption::new);
-        List<String> listaProducto= new Gestion().sucurProducto(sucursal2,productoServicio.findAll());
-        return new ResponseEntity<List<String>>(listaProducto, HttpStatus.OK);
-    }
-
-
     @GetMapping("sucursal/producto911/{nombreSu}")
 
     public ResponseEntity<List<Producto>> getSucursalProducto911(@PathVariable String nombreSu) throws SucursalException {

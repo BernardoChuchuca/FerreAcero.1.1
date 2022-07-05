@@ -25,9 +25,9 @@ public class PedidoDetalleServicio {
 
     }
 
-    public String ConsultaDatos(int id){
+    public PedidoDetalle ConsultaDatos(int id){
 
-        return (String) pedidoDetalleRepositorio.findPedidoDetalleById(id);
+        return (PedidoDetalle) pedidoDetalleRepositorio.findPedidoDetalleById(id);
 
     }
 

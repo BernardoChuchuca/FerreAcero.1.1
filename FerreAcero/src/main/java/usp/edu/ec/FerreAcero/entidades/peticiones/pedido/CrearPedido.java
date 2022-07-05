@@ -8,10 +8,12 @@ public class CrearPedido {
     private int numero;
     @JsonProperty
     private int persona_id;
-    @JsonProperty
-    private int producto_id;
+
     @JsonProperty
     private int carrito_id;
+
+    @JsonProperty
+    private int pedidodetalle_id;
 
     public int getNumero() {
         return numero;
@@ -29,19 +31,19 @@ public class CrearPedido {
         this.persona_id = persona_id;
     }
 
-    public int getProducto_id() {
-        return producto_id;
-    }
-
-    public void setProducto_id(int producto_id) {
-        this.producto_id = producto_id;
-    }
-
     public int getCarrito_id() {
         return carrito_id;
     }
 
     public void setCarrito_id(int carrito_id) {
         this.carrito_id = carrito_id;
+    }
+
+    public int getPedidodetalle_id() {
+        return pedidodetalle_id;
+    }
+
+    public void setPedidodetalle_id(int pedidodetalle_id) {
+        this.pedidodetalle_id = pedidodetalle_id;
     }
 }
