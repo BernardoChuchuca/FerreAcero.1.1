@@ -20,7 +20,7 @@ public class Producto implements Serializable {
     private Categoria categoria;
     @ManyToOne
     @JoinColumn
-    @JsonIgnore
+
     private Sucursal sucursal;
 
     @ManyToOne

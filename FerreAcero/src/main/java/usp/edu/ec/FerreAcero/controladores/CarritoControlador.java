@@ -22,20 +22,23 @@ public class CarritoControlador {
 
     private PersonaServicio personaServicio;
 
+    private CarritoServicio carritoservicio;
 
     @Autowired
     public void setCarritoservicio(CarritoServicio carritoServicio) {
         this.carritoServicio = carritoServicio;
     }
+
     @Autowired
     public void setPersonaServicio(PersonaServicio personaServicio) {
         this.personaServicio = personaServicio;
     }
 
     @GetMapping("/carritos")
-    public ResponseEntity<List<Carrito>> getAllCarrito(){
+    public ResponseEntity<List<Carrito>> getAllCarrito() {
 
-        List<Carrito> listaCarrito=carritoServicio.findAll();
+        List<Carrito> listaCarrito = carritoservicio.findAll();
+
 
         return new ResponseEntity<List<Carrito>>(listaCarrito, HttpStatus.OK);
     }
@@ -43,17 +46,17 @@ public class CarritoControlador {
 
     @GetMapping("/carrito/{numero}")
 
-    public ResponseEntity<Carrito> getCarrito(@PathVariable int numero) throws CarritoException{
+    public ResponseEntity<Carrito> getCarrito(@PathVariable int numero) throws CarritoException {
         Optional<Carrito> carrito = Optional.ofNullable(carritoServicio.consultaDatosCarrito(numero));
-        Carrito carrito1=carrito.orElseThrow(CarritoException::new);
+        Carrito carrito1 = carrito.orElseThrow(CarritoException::new);
 
         return new ResponseEntity<Carrito>(carrito1, HttpStatus.OK);
     }
 
-  @PostMapping("carrito/create")
-    public ResponseEntity<Carrito> crearPersona(@RequestBody CrearCarrito crearCarrito){
+    @PostMapping("carrito/create")
+    public ResponseEntity<Carrito> crearPersona(@RequestBody CrearCarrito crearCarrito) {
         Optional<Persona> persona = personaServicio.findByCodigo(crearCarrito.getPersona_id());
-        if(persona.isEmpty()){
+        if (persona.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
         Carrito carrito = new Carrito();
@@ -64,17 +67,17 @@ public class CarritoControlador {
 
         return ResponseEntity.ok(carrito);
 
-  }
+    }
 
-  @PutMapping("carrito/editar")
-  public ResponseEntity<String>editarCarrito(@RequestBody ActualizarCarrito actualizarCarrito){
+    @PutMapping("carrito/editar")
+    public ResponseEntity<String> editarCarrito(@RequestBody ActualizarCarrito actualizarCarrito) {
         Optional<Carrito> carritoOptional = carritoServicio.findById(actualizarCarrito.getId());
 
-        if(carritoOptional.isEmpty()){
+        if (carritoOptional.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
 
-        Carrito carritof=carritoOptional.get();
+        Carrito carritof = carritoOptional.get();
         carritof.setId(actualizarCarrito.getId());
         carritof.setNumero(actualizarCarrito.getNumero());
         carritof.setFecha(actualizarCarrito.getFecha());
@@ -83,12 +86,12 @@ public class CarritoControlador {
         carritoServicio.save(carritof);
 
         return ResponseEntity.ok("Carrito Actualizado");
-  }
+    }
 
-  @DeleteMapping("carrito/delete/{id}")
-    public ResponseEntity<String>deleteCarrito(@PathVariable int id){
+    @DeleteMapping("carrito/delete/{id}")
+    public ResponseEntity<String> deleteCarrito(@PathVariable int id) {
         carritoServicio.delete(id);
         return ResponseEntity.ok("Carro Eliminado");
-  }
-
+    }
 }
+

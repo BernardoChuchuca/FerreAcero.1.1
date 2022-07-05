@@ -26,7 +26,7 @@ public class Persona implements Serializable {
 
     private String  nombre;
     private String apellido;
-    private String clave;
+
     private String cedula;
     private String direccion;
     private String email;
@@ -41,6 +41,23 @@ public class Persona implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "persona", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<FormaPago> formapago;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "persona", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Usuario usuario;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "persona",cascade = CascadeType.ALL)
+
+    private List<Direccion>direcciones;
+
+
+    public List<Direccion> getDirecciones() {
+        return direcciones;
+    }
+
+    public void setDirecciones(List<Direccion> direcciones) {
+        this.direcciones = direcciones;
+    }
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
@@ -74,13 +91,7 @@ public class Persona implements Serializable {
         this.apellido = apellido;
     }
 
-    public String getClave() {
-        return clave;
-    }
 
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
 
     public String getCedula() {
         return cedula;
@@ -115,19 +126,31 @@ public class Persona implements Serializable {
     }
 
 
-
-    public Persona(int id, String nombre, String apellido, String clave, String cedula, String direccion, String email, String telefono, TarjetaCredito tarjetaCredito) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.clave = clave;
-        this.cedula = cedula;
-        this.direccion = direccion;
-        this.email = email;
-        this.telefono = telefono;
-
-
+    public List<TarjetaCredito> getTarjetaCredito() {
+        return tarjetaCredito;
     }
+
+
+    public void setTarjetaCredito(List<TarjetaCredito> tarjetaCredito) {
+        this.tarjetaCredito = tarjetaCredito;
+    }
+
+    public List<FormaPago> getFormapago() {
+        return formapago;
+    }
+
+    public void setFormapago(List<FormaPago> formapago) {
+        this.formapago = formapago;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     public Persona(){
     }
 
@@ -136,14 +159,12 @@ public class Persona implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Persona)) return false;
         Persona persona = (Persona) o;
-        return id == persona.id && Objects.equals(nombre, persona.nombre) && Objects.equals(apellido, persona.apellido) && Objects.equals(clave, persona.clave) && Objects.equals(cedula, persona.cedula) && Objects.equals(direccion, persona.direccion) && Objects.equals(email, persona.email) && Objects.equals(telefono, persona.telefono) && Objects.equals(tipo, persona.tipo);
+        return id == persona.id && Objects.equals(nombre, persona.nombre) && Objects.equals(apellido, persona.apellido) && Objects.equals(cedula, persona.cedula) && Objects.equals(direccion, persona.direccion) && Objects.equals(email, persona.email) && Objects.equals(telefono, persona.telefono) && Objects.equals(tipo, persona.tipo) && Objects.equals(tarjetaCredito, persona.tarjetaCredito) && Objects.equals(formapago, persona.formapago) && Objects.equals(usuario, persona.usuario) && Objects.equals(direcciones, persona.direcciones);
     }
-
-
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombre, apellido, clave, cedula, direccion, email, telefono, tipo);
+        return Objects.hash(id, nombre, apellido, cedula, direccion, email, telefono, tipo, tarjetaCredito, formapago, usuario, direcciones);
     }
 
     @Override
@@ -152,7 +173,7 @@ public class Persona implements Serializable {
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
-                ", clave='" + clave + '\'' +
+
                 ", cedula='" + cedula + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", email='" + email + '\'' +
@@ -160,4 +181,21 @@ public class Persona implements Serializable {
                 ", tipo='" + tipo + '\'' +
                 '}';
     }
+
+
+    public Persona(int id, String nombre, String apellido, String cedula, String direccion, String email, String telefono, String tipo, List<TarjetaCredito> tarjetaCredito, List<FormaPago> formapago, Usuario usuario, List<Direccion> direcciones) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cedula = cedula;
+        this.direccion = direccion;
+        this.email = email;
+        this.telefono = telefono;
+        this.tipo = tipo;
+        this.tarjetaCredito = tarjetaCredito;
+        this.formapago = formapago;
+        this.usuario = usuario;
+        this.direcciones = direcciones;
+    }
+
 }

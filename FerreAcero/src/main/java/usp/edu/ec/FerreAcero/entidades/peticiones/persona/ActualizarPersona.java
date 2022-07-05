@@ -10,8 +10,7 @@ public class ActualizarPersona {
     private String nombre;
     @JsonProperty
     private String apellido;
-    @JsonProperty
-    private String clave;
+
     @JsonProperty
     private String cedula;
     @JsonProperty
@@ -50,13 +49,7 @@ public class ActualizarPersona {
         this.apellido = apellido;
     }
 
-    public String getClave() {
-        return clave;
-    }
 
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
 
     public String getCedula() {
         return cedula;
