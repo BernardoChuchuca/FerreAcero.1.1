@@ -23,18 +23,9 @@ public class Producto implements Serializable {
     @JsonIgnore
     private Sucursal sucursal;
 
-    public Producto(String nombre, String marca, double precio, int stock, Categoria categoria, Sucursal sucursal) {
-        this.nombre = nombre;
-        this.marca = marca;
-        this.precio = precio;
-        this.stock = stock;
-        this.categoria = categoria;
-        this.sucursal = sucursal;
-    }
-
-    public Producto() {
-
-    }
+    @ManyToOne
+    @JoinColumn
+    private Pedido pedido;
 
     public int getId() {
         return id;
@@ -90,5 +81,13 @@ public class Producto implements Serializable {
 
     public void setSucursal(Sucursal sucursal) {
         this.sucursal = sucursal;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 }
