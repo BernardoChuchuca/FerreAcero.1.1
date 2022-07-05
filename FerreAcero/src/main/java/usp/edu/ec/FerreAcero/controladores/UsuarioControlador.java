@@ -57,7 +57,7 @@ public class UsuarioControlador {
             return ResponseEntity.ok("Cliente no existe");
         }else{
 
-            if(!usuarioO.isEmpty()){
+            if(usuarioO.isEmpty()){
                 Usuario usuario =new Usuario();
                 usuario.setUsuario(crearUsuario.getUsuario());
                 usuario.setClave(crearUsuario.getClave());
