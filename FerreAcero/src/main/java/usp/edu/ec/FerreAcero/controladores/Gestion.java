@@ -125,7 +125,7 @@ public class Gestion {
         double c = (Math.PI)/180;
 
         double d=2*R*Math.asin(Math.sqrt(Math.pow(Math.sin(c*(latD-latS)/2),2)+Math.cos(c*latS)*Math.cos(c*latD)*Math.pow(Math.sin(c*(lonD-lonS)/2),2)));
-        String dis=String.valueOf(d).concat(" KM");
+        String dis=String.valueOf((d/10000)).concat(" KM");
         return dis;
 
     }

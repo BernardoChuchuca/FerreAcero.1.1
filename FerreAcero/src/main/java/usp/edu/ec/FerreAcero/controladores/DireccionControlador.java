@@ -47,12 +47,9 @@ public class DireccionControlador {
 
 
 
-    @GetMapping("/distancia/{cedula}/{sucursal}")
+    @GetMapping("distancias/{cedula}/{sucursal}")
 
     public String Distancia(@PathVariable String cedula, @PathVariable String sucursal){
-
-
-
         Optional<Persona> persona = Optional.ofNullable(personaServicio.ConsultaDatosP(cedula));
         Optional<Sucursal> sucursal1 = Optional.ofNullable(sucursalServicio.ConsultaDatosP(sucursal));
         Sucursal sucursal2 = sucursal1.orElseThrow(FormaPagoExeption::new);
