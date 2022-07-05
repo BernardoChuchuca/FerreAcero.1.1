@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import usp.edu.ec.FerreAcero.entidades.Categoria;
+import usp.edu.ec.FerreAcero.entidades.Producto;
 import usp.edu.ec.FerreAcero.entidades.Sucursal;
 import usp.edu.ec.FerreAcero.servicios.*;
 
@@ -47,6 +48,20 @@ public class CategoriaControlador {
 
         return new ResponseEntity<List<String>>(listaProducto, HttpStatus.OK);
     }
+
+
+    @GetMapping("categoria/categoria911/{nombreCa2}")
+
+    public ResponseEntity<List<Producto>> getCategoriaProducto2(@PathVariable String nombreCa2) throws CategoriaException {
+
+
+        Optional<Categoria> sucursal1 = Optional.ofNullable(categoriaServicio.ConsultaDatosPC(nombreCa2));
+        Categoria sucursal2 = sucursal1.orElseThrow(FormaPagoExeption::new);
+        List<Producto> listaProductoc= new Gestion().productoCate911(sucursal2,productoServicio.findAll());
+        return new ResponseEntity<List<Producto>>(listaProductoc, HttpStatus.OK);
+    }
+
+
 
 
 

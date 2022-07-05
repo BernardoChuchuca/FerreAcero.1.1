@@ -70,7 +70,15 @@ public class Gestion {
         return nombresP;
     }
 
+
     public List<String> productoCate(Categoria categoria, List<Producto> listasPC) {
+
+
+
+
+
+    public  List<String> productoCate (Categoria categoria,List<Producto> listasPC){
+
         List<String> nombresPC = new ArrayList<>();
 
         for (int i = 0; i < listasPC.size(); i++) {
@@ -84,6 +92,27 @@ public class Gestion {
         return nombresPC;
     }
 
+
+    public  List<Producto> productoCate911 (Categoria categoria,List<Producto> listasPC){
+        List<Producto> nombresPC = new ArrayList<>();
+
+        for (int i=0; i < listasPC.size();i++){
+            if (categoria.getId()==listasPC.get(i).getCategoria().getId()){
+
+                Producto p2 = new Producto();
+
+                p2.setNombre(listasPC.get(i).getNombre());
+                p2.setMarca(listasPC.get(i).getMarca());
+                p2.setPrecio(listasPC.get(i).getPrecio());
+
+                nombresPC.add(p2);
+
+            }
+
+        }
+
+        return nombresPC;
+    }
 
     public String CalcularDistancia(Sucursal sucursal2, Direccion dir) {
 
@@ -110,15 +139,29 @@ public class Gestion {
         for (int i = 0; i < listasP2.size(); i++) {
             if (sucursal.getId() == listasP2.get(i).getSucursal().getId()) {
 
-                nombresP2.add(listasP2.get(i).getNombre());
-                nombresP2.add(listasP2.get(i).getMarca());
-                nombresP2.add(String.valueOf(listasP2.get(i).getPrecio()));
+
+
+    public  List<Producto> sucurProducto911 (Sucursal sucursal,List<Producto> listasP2){
+        List<Producto> nombresP2 = new ArrayList<>();
+
+        for (int i=0; i < listasP2.size();i++){
+            if (sucursal.getId()==listasP2.get(i).getSucursal().getId()){
+                Producto p1 = new Producto();
+
+                p1.setNombre(listasP2.get(i).getNombre());
+                p1.setMarca(listasP2.get(i).getMarca());
+                p1.setPrecio(listasP2.get(i).getPrecio());
+
+                nombresP2.add(p1);
+
+
             }
 
         }
 
         return nombresP2;
     }
+
 
     public String CalcularPrecioEnvio(Sucursal sucursal2, Direccion dir) {
 
@@ -156,6 +199,7 @@ public class Gestion {
         }
         return String.valueOf(envio);
     }
+
 }
 
 
