@@ -104,4 +104,21 @@ public class Gestion {
         return dis;
 
     }
+
+
+    public  List<String> sucurProducto2 (Sucursal sucursal,List<Producto> listasP2){
+        List<String> nombresP2 = new ArrayList<>();
+
+        for (int i=0; i < listasP2.size();i++){
+            if (sucursal.getId()==listasP2.get(i).getSucursal().getId()){
+
+                nombresP2.add(listasP2.get(i).getNombre());
+                nombresP2.add(listasP2.get(i).getMarca());
+                nombresP2.add(String.valueOf(listasP2.get(i).getPrecio()));
+            }
+
+        }
+
+        return nombresP2;
+    }
 }
