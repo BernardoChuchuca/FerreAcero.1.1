@@ -70,14 +70,28 @@ public class SucursalControlador {
 
 
 
+
     @GetMapping("sucursal/produ/{nombreSu}")
     public ResponseEntity<List<String>> getSucursalProducto2(@PathVariable String nombreSu) throws SucursalException {
+
 
         Optional<Sucursal> sucursal1 = Optional.ofNullable(sucursalServicio.ConsultaDatosP(nombreSu));
         Sucursal sucursal2 = sucursal1.orElseThrow(FormaPagoExeption::new);
         List<String> listaProducto= new Gestion().sucurProducto2(sucursal2,productoServicio.findAll());
-
         return new ResponseEntity<List<String>>(listaProducto, HttpStatus.OK);
     }
+
+    @GetMapping("sucursal/producto911/{nombreSu}")
+
+    public ResponseEntity<List<Producto>> getSucursalProducto911(@PathVariable String nombreSu) throws SucursalException {
+
+
+        Optional<Sucursal> sucursal1 = Optional.ofNullable(sucursalServicio.ConsultaDatosP(nombreSu));
+        Sucursal sucursal2 = sucursal1.orElseThrow(FormaPagoExeption::new);
+        List<Producto> listaProducto= new Gestion().sucurProducto911(sucursal2,productoServicio.findAll());
+        return new ResponseEntity<List<Producto>>(listaProducto, HttpStatus.OK);
+    }
+
+
 
 }

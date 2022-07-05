@@ -73,21 +73,7 @@ public class Gestion {
     }
 
 
-    public  List<String> sucurProducto2 (Sucursal sucursal,List<Producto> listasP2){
-        List<String> nombresP2 = new ArrayList<>();
 
-        for (int i=0; i < listasP2.size();i++){
-            if (sucursal.getId()==listasP2.get(i).getSucursal().getId()){
-
-                nombresP2.add(listasP2.get(i).getNombre());
-                nombresP2.add(listasP2.get(i).getMarca());
-                nombresP2.add(String.valueOf(listasP2.get(i).getPrecio()));
-            }
-
-        }
-
-        return nombresP2;
-    }
 
 
     public  List<String> productoCate (Categoria categoria,List<Producto> listasPC){
@@ -122,6 +108,31 @@ public class Gestion {
         return dis;
 
     }
+
+
+
+
+
+    public  List<Producto> sucurProducto911 (Sucursal sucursal,List<Producto> listasP2){
+        List<Producto> nombresP2 = new ArrayList<>();
+
+        for (int i=0; i < listasP2.size();i++){
+            if (sucursal.getId()==listasP2.get(i).getSucursal().getId()){
+                Producto p1 = new Producto();
+
+                p1.setNombre(listasP2.get(i).getNombre());
+                p1.setMarca(listasP2.get(i).getMarca());
+                p1.setPrecio(listasP2.get(i).getPrecio());
+
+                nombresP2.add(p1);
+
+            }
+
+        }
+
+        return nombresP2;
+    }
+
 
 
 
