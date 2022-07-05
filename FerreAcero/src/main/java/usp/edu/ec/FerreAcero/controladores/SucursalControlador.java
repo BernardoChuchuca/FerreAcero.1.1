@@ -68,6 +68,7 @@ public class SucursalControlador {
     }
 
 
+    @GetMapping("sucursal/produ/{nombreSu}")
 
 
 
@@ -88,5 +89,3 @@ public class SucursalControlador {
     }
 
 
-
-}

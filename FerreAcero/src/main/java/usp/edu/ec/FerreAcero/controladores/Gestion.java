@@ -10,12 +10,12 @@ import java.util.List;
 public class Gestion {
 
 
-    public List<TarjetaCredito>listatajetas(List<TarjetaCredito>tarjetaCreditos,String cedula){
+    public List<TarjetaCredito> listatajetas(List<TarjetaCredito> tarjetaCreditos, String cedula) {
 
-        List<TarjetaCredito>listatajetas=new ArrayList<>();
+        List<TarjetaCredito> listatajetas = new ArrayList<>();
 
 
-        for (int i=0;i<tarjetaCreditos.size();i++) {
+        for (int i = 0; i < tarjetaCreditos.size(); i++) {
 
             if (tarjetaCreditos.get(i).getPersona().getCedula().equals(cedula)) {
                 TarjetaCredito tar = new TarjetaCredito();
@@ -36,10 +36,9 @@ public class Gestion {
     }
 
 
-
-    public  List<String> sucurNombre ( List<Sucursal> listas){
+    public List<String> sucurNombre(List<Sucursal> listas) {
         List<String> nombres = new ArrayList<>();
-        for (int i=0; i < listas.size();i++){
+        for (int i = 0; i < listas.size(); i++) {
             nombres.add(listas.get(i).getNombre());
         }
 
@@ -47,9 +46,9 @@ public class Gestion {
     }
 
 
-    public  List<String> categoriaNombre ( List<Categoria> listasC){
-        List<String>  nombresC= new ArrayList<>();
-        for (int i=0; i < listasC.size();i++){
+    public List<String> categoriaNombre(List<Categoria> listasC) {
+        List<String> nombresC = new ArrayList<>();
+        for (int i = 0; i < listasC.size(); i++) {
             nombresC.add(listasC.get(i).getNombre());
         }
 
@@ -57,12 +56,11 @@ public class Gestion {
     }
 
 
-
-    public  List<String> sucurProducto (Sucursal sucursal,List<Producto> listasP){
+    public List<String> sucurProducto(Sucursal sucursal, List<Producto> listasP) {
         List<String> nombresP = new ArrayList<>();
 
-        for (int i=0; i < listasP.size();i++){
-            if (sucursal.getId()==listasP.get(i).getSucursal().getId()){
+        for (int i = 0; i < listasP.size(); i++) {
+            if (sucursal.getId() == listasP.get(i).getSucursal().getId()) {
 
                 nombresP.add(listasP.get(i).getNombre());
             }
@@ -76,11 +74,15 @@ public class Gestion {
 
 
 
+
+
+
     public  List<String> productoCate (Categoria categoria,List<Producto> listasPC){
+
         List<String> nombresPC = new ArrayList<>();
 
-        for (int i=0; i < listasPC.size();i++){
-            if (categoria.getId()==listasPC.get(i).getCategoria().getId()){
+        for (int i = 0; i < listasPC.size(); i++) {
+            if (categoria.getId() == listasPC.get(i).getCategoria().getId()) {
 
                 nombresPC.add(listasPC.get(i).getNombre());
             }
@@ -114,23 +116,29 @@ public class Gestion {
 
     public String CalcularDistancia(Sucursal sucursal2, Direccion dir) {
 
-        double latS=Double.parseDouble(sucursal2.getLatitud());
-        double lonS=Double.parseDouble(sucursal2.getLongitud());
+        double latS = Double.parseDouble(sucursal2.getLatitud());
+        double lonS = Double.parseDouble(sucursal2.getLongitud());
 
-        double latD=dir.getLatitud();
-        double lonD=dir.getLongitud();
+        double latD = dir.getLatitud();
+        double lonD = dir.getLongitud();
 
-        double R=6378;
+        double R = 6378;
 
-        double c = (Math.PI)/180;
+        double c = (Math.PI) / 180;
 
         double d=2*R*Math.asin(Math.sqrt(Math.pow(Math.sin(c*(latD-latS)/2),2)+Math.cos(c*latS)*Math.cos(c*latD)*Math.pow(Math.sin(c*(lonD-lonS)/2),2)));
         String dis=String.valueOf((d/10000)).concat(" KM");
+
         return dis;
 
     }
 
 
+    public List<String> sucurProducto2(Sucursal sucursal, List<Producto> listasP2) {
+        List<String> nombresP2 = new ArrayList<>();
+
+        for (int i = 0; i < listasP2.size(); i++) {
+            if (sucursal.getId() == listasP2.get(i).getSucursal().getId()) {
 
 
 
@@ -147,6 +155,7 @@ public class Gestion {
 
                 nombresP2.add(p1);
 
+
             }
 
         }
@@ -155,6 +164,43 @@ public class Gestion {
     }
 
 
+    public String CalcularPrecioEnvio(Sucursal sucursal2, Direccion dir) {
 
+        double latS = Double.parseDouble(sucursal2.getLatitud());
+        double lonS = Double.parseDouble(sucursal2.getLongitud());
+
+        double latD = dir.getLatitud();
+        double lonD = dir.getLongitud();
+
+        double R = 6378;
+
+        double c = (Math.PI) / 180;
+
+        double d = 2 * R * Math.asin(Math.sqrt(Math.pow(Math.sin(c * (latD - latS) / 2), 2) + Math.cos(c * latS) * Math.cos(c * latD) * Math.pow(Math.sin(c * (lonD - lonS) / 2), 2)));
+
+        double envio = 0;
+        String dis = String.valueOf(d).concat(" KM");
+
+        if((d/1000) < 1 ){
+            envio = 0.70;
+
+        } else if((d/1000) > 1 && (d/1000) <= 3){
+            envio = 1.20;
+
+        }else if((d/1000) > 3 && (d/1000) <= 5) {
+            envio = 1.80;
+        }
+
+        else if((d/1000) > 5 && (d/1000) <= 8) {
+            envio = 2.10;
+        }
+
+        else if((d/1000) > 8 && (d/1000) <= 10) {
+            envio = 2.50;
+        }
+        return String.valueOf(envio);
+    }
 
 }
+
+
