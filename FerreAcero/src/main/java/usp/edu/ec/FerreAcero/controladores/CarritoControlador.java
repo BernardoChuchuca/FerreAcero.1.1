@@ -38,7 +38,7 @@ public class CarritoControlador {
     public ResponseEntity<List<Carrito>> getAllCarrito() {
 
         List<Carrito> listaCarrito = carritoservicio.findAll();
-        List<Carrito> listaCarrito=carritoServicio.findAll();
+
 
         return new ResponseEntity<List<Carrito>>(listaCarrito, HttpStatus.OK);
     }
