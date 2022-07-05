@@ -41,7 +41,7 @@ public class PedidoControlador {
     public void setProductoServicio(ProductoServicio productoServicio) {
         this.productoServicio = productoServicio;
     }
-
+    @Autowired
     public void setCarritoServicio(CarritoServicio carritoServicio) {
         this.carritoServicio = carritoServicio;
     }
@@ -66,7 +66,7 @@ public class PedidoControlador {
     }
 
 
-    @PostMapping("pedido/crear")
+    @PostMapping("/pedido/crear")
     public ResponseEntity<Pedido> crearPedido(@RequestBody CrearPedido crearPedido){
         Optional<Persona> persona = personaServicio.findByCodigo(crearPedido.getPersona_id());
         if(persona.isEmpty()){
@@ -90,7 +90,7 @@ public class PedidoControlador {
         return ResponseEntity.ok(pedido);
     }
 
-    @PutMapping("carrito/editar")
+    @PutMapping("/pedido/editar")
     public ResponseEntity<String>editarPedido(@RequestBody ActualizarPedido actualizarPedido){
         Optional<Pedido> pedidoOptional = pedidoServicio.findById(actualizarPedido.getId());
 
@@ -106,7 +106,7 @@ public class PedidoControlador {
         return ResponseEntity.ok("Pedido Actualizado");
     }
 
-    @DeleteMapping("carrito/delete/{id}")
+    @DeleteMapping("/pedido/delete/{id}")
     public ResponseEntity<String>deletePedido(@PathVariable int id){
         pedidoServicio.delete(id);
         return ResponseEntity.ok("Pedido Eliminado");

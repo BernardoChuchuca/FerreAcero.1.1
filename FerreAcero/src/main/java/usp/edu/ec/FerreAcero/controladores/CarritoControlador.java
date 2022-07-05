@@ -22,10 +22,8 @@ public class CarritoControlador {
 
     private PersonaServicio personaServicio;
 
-    private CarritoServicio carritoservicio;
-
     @Autowired
-    public void setCarritoservicio(CarritoServicio carritoServicio) {
+    public void setCarritoServicio(CarritoServicio carritoServicio) {
         this.carritoServicio = carritoServicio;
     }
 
@@ -37,7 +35,7 @@ public class CarritoControlador {
     @GetMapping("/carritos")
     public ResponseEntity<List<Carrito>> getAllCarrito() {
 
-        List<Carrito> listaCarrito = carritoservicio.findAll();
+        List<Carrito> listaCarrito = carritoServicio.findAll();
 
 
         return new ResponseEntity<List<Carrito>>(listaCarrito, HttpStatus.OK);
@@ -53,7 +51,7 @@ public class CarritoControlador {
         return new ResponseEntity<Carrito>(carrito1, HttpStatus.OK);
     }
 
-    @PostMapping("carrito/create")
+    @PostMapping("/carrito/create")
     public ResponseEntity<Carrito> crearPersona(@RequestBody CrearCarrito crearCarrito) {
         Optional<Persona> persona = personaServicio.findByCodigo(crearCarrito.getPersona_id());
         if (persona.isEmpty()) {
@@ -69,7 +67,7 @@ public class CarritoControlador {
 
     }
 
-    @PutMapping("carrito/editar")
+    @PutMapping("/carrito/editar")
     public ResponseEntity<String> editarCarrito(@RequestBody ActualizarCarrito actualizarCarrito) {
         Optional<Carrito> carritoOptional = carritoServicio.findById(actualizarCarrito.getId());
 
@@ -88,7 +86,7 @@ public class CarritoControlador {
         return ResponseEntity.ok("Carrito Actualizado");
     }
 
-    @DeleteMapping("carrito/delete/{id}")
+    @DeleteMapping("/carrito/delete/{id}")
     public ResponseEntity<String> deleteCarrito(@PathVariable int id) {
         carritoServicio.delete(id);
         return ResponseEntity.ok("Carro Eliminado");
