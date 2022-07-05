@@ -74,4 +74,31 @@ public class DireccionControlador {
         return distancia;
     }
 
+    @GetMapping("/envio/{cedula}/{sucursal}")
+
+    public String PrecioEnvio(@PathVariable String cedula, @PathVariable String sucursal){
+
+
+
+        Optional<Persona> persona = Optional.ofNullable(personaServicio.ConsultaDatosP(cedula));
+        Optional<Sucursal> sucursal1 = Optional.ofNullable(sucursalServicio.ConsultaDatosP(sucursal));
+        Sucursal sucursal2 = sucursal1.orElseThrow(FormaPagoExeption::new);
+        Persona persona1= persona.orElseThrow(FormaPagoExeption::new);
+        Optional<Direccion> direccion = Optional.ofNullable(direccionServicio.ConsultaPer(persona1.getId()));
+        Direccion dir= direccion.orElseThrow(FormaPagoExeption::new);
+        String distancia="";
+
+
+        distancia=new Gestion().CalcularPrecioEnvio(sucursal2,dir);
+
+
+
+
+
+
+
+
+        return distancia;
+    }
+
 }

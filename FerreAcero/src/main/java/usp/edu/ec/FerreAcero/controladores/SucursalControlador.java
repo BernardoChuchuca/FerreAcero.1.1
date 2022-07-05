@@ -67,11 +67,6 @@ public class SucursalControlador {
         return new ResponseEntity<List<String>>(listaProducto, HttpStatus.OK);
     }
 
-
-    @GetMapping("sucursal/prod/{nombreSu}")
-
-    public ResponseEntity<List<String>> getSucursalProductoX(@PathVariable String nombreSu) throws SucursalException {
-
     @GetMapping("sucursal/produ/{nombreSu}")
 
     public ResponseEntity<List<String>> getSucursalProducto2(@PathVariable String nombreSu) throws SucursalException {
@@ -82,5 +77,4 @@ public class SucursalControlador {
 
         return new ResponseEntity<List<String>>(listaProducto, HttpStatus.OK);
     }
-
 }
