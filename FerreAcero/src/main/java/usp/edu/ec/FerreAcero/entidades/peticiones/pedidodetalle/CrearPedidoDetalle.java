@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CrearPedidoDetalle {
 
     @JsonProperty
+    private int cantidad;
+
+    @JsonProperty
     private double subtotal;
 
     @JsonProperty
@@ -21,6 +24,14 @@ public class CrearPedidoDetalle {
 
     public double getSubtotal() {
         return subtotal;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public void setSubtotal(double subtotal) {

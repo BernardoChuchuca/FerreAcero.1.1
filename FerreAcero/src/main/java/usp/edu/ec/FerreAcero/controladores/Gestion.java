@@ -196,6 +196,27 @@ public class Gestion {
         return String.valueOf(envio);
     }
 
+    public String IdCliente(Persona persona){
+
+        int IdPersona = persona.getId();
+
+        return String.valueOf(IdPersona);
+    }
+
+    public double CalcularSubTotal(Producto producto, PedidoDetalle pedidoDetalle){
+
+
+        double precioProducto = producto.getPrecio();
+        int cantidadPedido = pedidoDetalle.getCantidad();
+
+        double calculo = cantidadPedido * precioProducto;
+
+        return (calculo);
+    }
+
+
+
+
 }
 
 

@@ -79,6 +79,7 @@ public class PedidoDetalleControlador {
        }
 
        PedidoDetalle pedidoDetalle = new PedidoDetalle();
+       pedidoDetalle.setCantidad(crearPedidoDetalle.getCantidad());
        pedidoDetalle.setSubtotal(crearPedidoDetalle.getSubtotal());
        pedidoDetalle.setTotal(crearPedidoDetalle.getTotal());
        pedidoDetalle.setPedido(pedido.get());
@@ -101,6 +102,7 @@ public class PedidoDetalleControlador {
 
         PedidoDetalle pedidoDetalle1=pedidoDetalleOptional.get();
 
+        pedidoDetalle1.setCantidad(actualizarPedidoDetalle.getCantidad());
         pedidoDetalle1.setId(actualizarPedidoDetalle.getId());
         pedidoDetalle1.setSubtotal(actualizarPedidoDetalle.getSubtotal());
         pedidoDetalle1.setTotal(actualizarPedidoDetalle.getTotal());

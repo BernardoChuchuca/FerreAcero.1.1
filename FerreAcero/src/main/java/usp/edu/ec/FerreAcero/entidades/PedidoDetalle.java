@@ -10,6 +10,8 @@ public class PedidoDetalle {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    private int cantidad;
+
     private double total;
 
     private double subtotal;
@@ -30,8 +32,9 @@ public class PedidoDetalle {
     public PedidoDetalle() {
     }
 
-    public PedidoDetalle(int id, double total, double subtotal, Producto producto, Pedido pedido, CarritoDetalle carritoDetalle) {
+    public PedidoDetalle(int id, int cantidad, double total, double subtotal, Producto producto, Pedido pedido, CarritoDetalle carritoDetalle) {
         this.id = id;
+        this.cantidad = cantidad;
         this.total = total;
         this.subtotal = subtotal;
         this.producto = producto;
@@ -45,6 +48,14 @@ public class PedidoDetalle {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public double getTotal() {
@@ -92,18 +103,19 @@ public class PedidoDetalle {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PedidoDetalle that = (PedidoDetalle) o;
-        return id == that.id && Double.compare(that.total, total) == 0 && Double.compare(that.subtotal, subtotal) == 0 && producto.equals(that.producto) && pedido.equals(that.pedido) && carritoDetalle.equals(that.carritoDetalle);
+        return id == that.id && cantidad == that.cantidad && Double.compare(that.total, total) == 0 && Double.compare(that.subtotal, subtotal) == 0 && producto.equals(that.producto) && pedido.equals(that.pedido) && carritoDetalle.equals(that.carritoDetalle);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, total, subtotal, producto, pedido, carritoDetalle);
+        return Objects.hash(id, cantidad, total, subtotal, producto, pedido, carritoDetalle);
     }
 
     @Override
     public String toString() {
         return "PedidoDetalle{" +
                 "id=" + id +
+                ", cantidad=" + cantidad +
                 ", total=" + total +
                 ", subtotal=" + subtotal +
                 ", producto=" + producto +

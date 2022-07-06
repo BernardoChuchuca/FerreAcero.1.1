@@ -9,6 +9,9 @@ public class ActualizarPedido {
     @JsonProperty
     private int numero;
 
+    @JsonProperty
+    private String estado;
+
     public int getId() {
         return id;
     }
@@ -23,5 +26,13 @@ public class ActualizarPedido {
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

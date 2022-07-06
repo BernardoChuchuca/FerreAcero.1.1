@@ -6,6 +6,10 @@ public class CrearPedido {
 
     @JsonProperty
     private int numero;
+
+    @JsonProperty
+    private String estado;
+
     @JsonProperty
     private int persona_id;
 
@@ -21,6 +25,14 @@ public class CrearPedido {
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public int getPersona_id() {
