@@ -90,12 +90,7 @@ public class Gestion {
         return nombresP;
     }
 
-
-
-
-
-
-
+    
 
     public  List<String> productoCate (Categoria categoria,List<Producto> listasPC){
 
