@@ -12,7 +12,6 @@ public class PedidoDetalle {
 
     private int cantidad;
 
-    private double total;
 
     private double subtotal;
 
@@ -25,21 +24,16 @@ public class PedidoDetalle {
     @JoinColumn
     private Pedido pedido;
 
-    @OneToOne
-    @JoinColumn
-    private CarritoDetalle carritoDetalle;
 
     public PedidoDetalle() {
     }
 
-    public PedidoDetalle(int id, int cantidad, double total, double subtotal, Producto producto, Pedido pedido, CarritoDetalle carritoDetalle) {
+    public PedidoDetalle(int id, int cantidad, double subtotal, Producto producto, Pedido pedido, CarritoDetalle carritoDetalle) {
         this.id = id;
         this.cantidad = cantidad;
-        this.total = total;
         this.subtotal = subtotal;
         this.producto = producto;
         this.pedido = pedido;
-        this.carritoDetalle = carritoDetalle;
     }
 
     public int getId() {
@@ -58,13 +52,6 @@ public class PedidoDetalle {
         this.cantidad = cantidad;
     }
 
-    public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
-    }
 
     public double getSubtotal() {
         return subtotal;
@@ -90,25 +77,18 @@ public class PedidoDetalle {
         this.pedido = pedido;
     }
 
-    public CarritoDetalle getCarritoDetalle() {
-        return carritoDetalle;
-    }
-
-    public void setCarritoDetalle(CarritoDetalle carritoDetalle) {
-        this.carritoDetalle = carritoDetalle;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PedidoDetalle that = (PedidoDetalle) o;
-        return id == that.id && cantidad == that.cantidad && Double.compare(that.total, total) == 0 && Double.compare(that.subtotal, subtotal) == 0 && producto.equals(that.producto) && pedido.equals(that.pedido) && carritoDetalle.equals(that.carritoDetalle);
+        return id == that.id && cantidad == that.cantidad && Double.compare(that.subtotal, subtotal) == 0 && producto.equals(that.producto) && pedido.equals(that.pedido);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, cantidad, total, subtotal, producto, pedido, carritoDetalle);
+        return Objects.hash(id, cantidad, subtotal, producto, pedido);
     }
 
     @Override
@@ -116,11 +96,9 @@ public class PedidoDetalle {
         return "PedidoDetalle{" +
                 "id=" + id +
                 ", cantidad=" + cantidad +
-                ", total=" + total +
                 ", subtotal=" + subtotal +
                 ", producto=" + producto +
                 ", pedido=" + pedido +
-                ", carritoDetalle=" + carritoDetalle +
                 '}';
     }
 }

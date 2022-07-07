@@ -11,6 +11,9 @@ public class CrearPedido {
     private String estado;
 
     @JsonProperty
+    private double total;
+
+    @JsonProperty
     private int persona_id;
 
     @JsonProperty
@@ -33,6 +36,14 @@ public class CrearPedido {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     public int getPersona_id() {

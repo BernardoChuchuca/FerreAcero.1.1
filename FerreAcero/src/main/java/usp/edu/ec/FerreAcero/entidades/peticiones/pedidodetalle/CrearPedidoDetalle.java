@@ -10,8 +10,6 @@ public class CrearPedidoDetalle {
     @JsonProperty
     private double subtotal;
 
-    @JsonProperty
-    private double total;
 
     @JsonProperty
     private int producto_id;
@@ -38,13 +36,6 @@ public class CrearPedidoDetalle {
         this.subtotal = subtotal;
     }
 
-    public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
-    }
 
     public int getProducto_id() {
         return producto_id;

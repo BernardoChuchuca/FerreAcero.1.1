@@ -17,6 +17,8 @@ public class Pedido {
 
     private String estado;
 
+    private double total;
+
     @ManyToOne
     @JoinColumn
     private Persona persona;
@@ -26,6 +28,7 @@ public class Pedido {
     private List<PedidoDetalle> pedidoDetalle;
 
 
+
     @OneToOne
     @JoinColumn
     private Carrito carrito;
@@ -33,10 +36,11 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(int id, int numero, String estado, Persona persona, List<PedidoDetalle> pedidoDetalle, Carrito carrito) {
+    public Pedido(int id, int numero, String estado, double total, Persona persona, List<PedidoDetalle> pedidoDetalle, Carrito carrito) {
         this.id = id;
         this.numero = numero;
         this.estado = estado;
+        this.total = total;
         this.persona = persona;
         this.pedidoDetalle = pedidoDetalle;
         this.carrito = carrito;
@@ -64,6 +68,14 @@ public class Pedido {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     public Persona getPersona() {
@@ -95,12 +107,12 @@ public class Pedido {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pedido pedido = (Pedido) o;
-        return id == pedido.id && numero == pedido.numero && estado.equals(pedido.estado) && persona.equals(pedido.persona) && pedidoDetalle.equals(pedido.pedidoDetalle) && carrito.equals(pedido.carrito);
+        return id == pedido.id && numero == pedido.numero && Double.compare(pedido.total, total) == 0 && estado.equals(pedido.estado) && persona.equals(pedido.persona) && pedidoDetalle.equals(pedido.pedidoDetalle) && carrito.equals(pedido.carrito);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, numero, estado, persona, pedidoDetalle, carrito);
+        return Objects.hash(id, numero, estado, total, persona, pedidoDetalle, carrito);
     }
 
     @Override
@@ -109,9 +121,13 @@ public class Pedido {
                 "id=" + id +
                 ", numero=" + numero +
                 ", estado='" + estado + '\'' +
+                ", total=" + total +
                 ", persona=" + persona +
                 ", pedidoDetalle=" + pedidoDetalle +
                 ", carrito=" + carrito +
                 '}';
     }
+
+
+
 }

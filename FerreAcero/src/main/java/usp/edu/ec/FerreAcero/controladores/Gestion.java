@@ -6,6 +6,7 @@ import usp.edu.ec.FerreAcero.entidades.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Gestion {
 
@@ -203,20 +204,39 @@ public class Gestion {
         return String.valueOf(IdPersona);
     }
 
-    public double CalcularSubTotal(Producto producto, PedidoDetalle pedidoDetalle){
 
 
-        double precioProducto = producto.getPrecio();
-        int cantidadPedido = pedidoDetalle.getCantidad();
 
-        double calculo = cantidadPedido * precioProducto;
 
-        return (calculo);
+    public List<PedidoDetalle> agregarProductos(List<PedidoDetalle> pedidoDetalleList, Producto producto1, int cantidad) {
+
+        PedidoDetalle pedidoDetalle = new PedidoDetalle();
+        pedidoDetalle.setProducto(producto1);
+        pedidoDetalle.setCantidad(cantidad);
+        pedidoDetalle.setSubtotal(CalcularSubTotal(cantidad, producto1.getPrecio()));
+        pedidoDetalleList.add(pedidoDetalle);
+        return pedidoDetalleList;
+
     }
 
+    private double CalcularSubTotal(int cantidad, double precio) {
 
 
+        return cantidad * precio;
+    }
 
+    public double Total(List<PedidoDetalle> pedidoDetalleList) {
+
+        double total = 0;
+
+        for(int i = 0 ; i<pedidoDetalleList.size(); i++){
+
+            total = total + pedidoDetalleList.get(i).getSubtotal();
+
+        }
+
+        return total;
+    }
 }
 
 

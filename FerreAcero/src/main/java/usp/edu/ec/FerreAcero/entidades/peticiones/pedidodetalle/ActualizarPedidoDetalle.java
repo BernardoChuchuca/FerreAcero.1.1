@@ -13,8 +13,6 @@ public class ActualizarPedidoDetalle {
     @JsonProperty
     private double subtotal;
 
-    @JsonProperty
-    private double total;
 
     public int getId() {
         return id;
@@ -40,11 +38,5 @@ public class ActualizarPedidoDetalle {
         this.subtotal = subtotal;
     }
 
-    public double getTotal() {
-        return total;
-    }
 
-    public void setTotal(double total) {
-        this.total = total;
-    }
 }
