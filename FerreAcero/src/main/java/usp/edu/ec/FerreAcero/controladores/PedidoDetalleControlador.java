@@ -10,11 +10,9 @@ import usp.edu.ec.FerreAcero.entidades.PedidoDetalle;
 import usp.edu.ec.FerreAcero.entidades.Producto;
 import usp.edu.ec.FerreAcero.entidades.peticiones.pedidodetalle.ActualizarPedidoDetalle;
 import usp.edu.ec.FerreAcero.entidades.peticiones.pedidodetalle.CrearPedidoDetalle;
-import usp.edu.ec.FerreAcero.servicios.CarritoDetalleServicio;
-import usp.edu.ec.FerreAcero.servicios.PedidoDetalleServicio;
-import usp.edu.ec.FerreAcero.servicios.PedidoServicio;
-import usp.edu.ec.FerreAcero.servicios.ProductoServicio;
+import usp.edu.ec.FerreAcero.servicios.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +26,8 @@ public class PedidoDetalleControlador {
     private CarritoDetalleServicio carritoDetalleServicio;
 
     private PedidoServicio pedidoServicio;
+
+    private List<PedidoDetalle> pedidoDetalleList=new ArrayList<>();
 
     @Autowired
     public void setPedidoDetalleServicio(PedidoDetalleServicio pedidoDetalleServicio) {
@@ -50,6 +50,7 @@ public class PedidoDetalleControlador {
         this.pedidoServicio = pedidoServicio;
     }
 
+
     @GetMapping("/pedidodetalles")
     public ResponseEntity<List<PedidoDetalle>> getAllPedidoDetalle(){
 
@@ -63,6 +64,7 @@ public class PedidoDetalleControlador {
     @PostMapping("/pedidodetalle/crear")
     public ResponseEntity<PedidoDetalle> crearPedidoDetalle(@RequestBody CrearPedidoDetalle crearPedidoDetalle){
        Optional<Producto> producto = productoServicio.findByCodigo(crearPedidoDetalle.getProducto_id());
+       Producto producto1 = producto.orElseThrow(PedidoException::new);
        if(producto.isEmpty()){
            return ResponseEntity.badRequest().build();
        }
@@ -78,13 +80,18 @@ public class PedidoDetalleControlador {
            return ResponseEntity.badRequest().build();
        }
 
+
+
        PedidoDetalle pedidoDetalle = new PedidoDetalle();
+       pedidoDetalle.setCantidad(crearPedidoDetalle.getCantidad());
        pedidoDetalle.setSubtotal(crearPedidoDetalle.getSubtotal());
-       pedidoDetalle.setTotal(crearPedidoDetalle.getTotal());
        pedidoDetalle.setPedido(pedido.get());
        pedidoDetalle.setProducto(producto.get());
-       pedidoDetalle.setCarritoDetalle(carritoDetalle.get());
-       pedidoDetalleServicio.save(pedidoDetalle);
+
+
+       pedidoDetalleList = new Gestion().agregarProductos(pedidoDetalleList, producto1, crearPedidoDetalle.getCantidad());
+        double total =new Gestion().Total(pedidoDetalleList);
+                pedidoDetalleServicio.save(pedidoDetalle);
 
        return ResponseEntity.ok(pedidoDetalle);
 
@@ -101,9 +108,9 @@ public class PedidoDetalleControlador {
 
         PedidoDetalle pedidoDetalle1=pedidoDetalleOptional.get();
 
+        pedidoDetalle1.setCantidad(actualizarPedidoDetalle.getCantidad());
         pedidoDetalle1.setId(actualizarPedidoDetalle.getId());
         pedidoDetalle1.setSubtotal(actualizarPedidoDetalle.getSubtotal());
-        pedidoDetalle1.setTotal(actualizarPedidoDetalle.getTotal());
         pedidoDetalleServicio.save(pedidoDetalle1);
 
         return ResponseEntity.ok("Pedido detalle Actualizado");

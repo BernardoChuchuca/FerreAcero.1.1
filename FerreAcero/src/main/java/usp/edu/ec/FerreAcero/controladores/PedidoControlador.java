@@ -14,7 +14,12 @@ import java.util.Optional;
 
 @RestController
 public class PedidoControlador {
+
    Gestion ges;
+
+
+
+
     private PedidoServicio pedidoServicio;
 
     private PersonaServicio personaServicio;
@@ -91,6 +96,8 @@ public class PedidoControlador {
 
         Pedido pedido = new Pedido();
         pedido.setNumero(crearPedido.getNumero());
+        pedido.setEstado(crearPedido.getEstado());
+        pedido.setTotal(crearPedido.getTotal());
         pedido.setPersona(persona.get());
         pedido.setCarrito(carrito.get());
         pedidoServicio.save(pedido);
@@ -111,6 +118,8 @@ public class PedidoControlador {
         Pedido pedidof=pedidoOptional.get();
         pedidof.setId(actualizarPedido.getId());
         pedidof.setNumero(actualizarPedido.getNumero());
+        pedidof.setEstado(actualizarPedido.getEstado());
+        pedidof.setTotal(actualizarPedido.getTotal());
         pedidoServicio.save(pedidof);
 
         return ResponseEntity.ok("Pedido Actualizado");

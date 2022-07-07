@@ -5,10 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CrearPedidoDetalle {
 
     @JsonProperty
-    private double subtotal;
+    private int cantidad;
 
     @JsonProperty
-    private double total;
+    private double subtotal;
+
 
     @JsonProperty
     private int producto_id;
@@ -23,17 +24,18 @@ public class CrearPedidoDetalle {
         return subtotal;
     }
 
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
     public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
     }
 
-    public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
-    }
 
     public int getProducto_id() {
         return producto_id;
