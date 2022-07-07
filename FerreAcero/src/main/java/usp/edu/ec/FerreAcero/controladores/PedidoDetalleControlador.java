@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import usp.edu.ec.FerreAcero.entidades.CarritoDetalle;
-import usp.edu.ec.FerreAcero.entidades.Pedido;
-import usp.edu.ec.FerreAcero.entidades.PedidoDetalle;
-import usp.edu.ec.FerreAcero.entidades.Producto;
+import usp.edu.ec.FerreAcero.entidades.*;
 import usp.edu.ec.FerreAcero.entidades.peticiones.pedidodetalle.ActualizarPedidoDetalle;
 import usp.edu.ec.FerreAcero.entidades.peticiones.pedidodetalle.CrearPedidoDetalle;
 import usp.edu.ec.FerreAcero.servicios.*;
@@ -23,7 +20,6 @@ public class PedidoDetalleControlador {
 
     private ProductoServicio productoServicio;
 
-    private CarritoDetalleServicio carritoDetalleServicio;
 
     private PedidoServicio pedidoServicio;
 
@@ -40,10 +36,6 @@ public class PedidoDetalleControlador {
         this.productoServicio = productoServicio;
     }
 
-    @Autowired
-    public void setCarritoDetalleServicio(CarritoDetalleServicio carritoDetalleServicio) {
-        this.carritoDetalleServicio = carritoDetalleServicio;
-    }
 
     @Autowired
     public void setPedidoServicio(PedidoServicio pedidoServicio) {
@@ -69,29 +61,33 @@ public class PedidoDetalleControlador {
            return ResponseEntity.badRequest().build();
        }
 
-       Optional<CarritoDetalle> carritoDetalle = carritoDetalleServicio.findById(crearPedidoDetalle.getCarritodetalle_id());
-       if(carritoDetalle.isEmpty()){
-           return ResponseEntity.badRequest().build();
-       }
 
        Optional<Pedido> pedido = pedidoServicio.findById(crearPedidoDetalle.getPedido_id()) ;
        if(pedido.isEmpty()){
 
            return ResponseEntity.badRequest().build();
        }
-
-
-
-       PedidoDetalle pedidoDetalle = new PedidoDetalle();
-       pedidoDetalle.setCantidad(crearPedidoDetalle.getCantidad());
-       pedidoDetalle.setSubtotal(crearPedidoDetalle.getSubtotal());
-       pedidoDetalle.setPedido(pedido.get());
-       pedidoDetalle.setProducto(producto.get());
-
-
        pedidoDetalleList = new Gestion().agregarProductos(pedidoDetalleList, producto1, crearPedidoDetalle.getCantidad());
-        double total =new Gestion().Total(pedidoDetalleList);
-                pedidoDetalleServicio.save(pedidoDetalle);
+
+        Pedido pedido1 = new Pedido();
+        Persona persona1 = new Persona();
+        persona1.setId(1);
+        Carrito carrito1 = new Carrito();
+        carrito1.setId(5);
+        pedido1.setId(105);
+        pedido1.setNumero(5);
+        pedido1.setEstado("Eliminado");
+        pedido1.setTotal(new Gestion().Total(pedidoDetalleList));
+        pedido1.setPersona(persona1);
+        pedido1.setCarrito(carrito1);
+
+        PedidoDetalle pedidoDetalle = new PedidoDetalle();
+
+        pedidoDetalle.setCantidad(crearPedidoDetalle.getCantidad());
+        pedidoDetalle.setSubtotal(new Gestion().CalcularSubTotal(crearPedidoDetalle.getCantidad(), producto1.getPrecio()));
+        pedidoDetalle.setPedido(pedido1);
+        pedidoDetalle.setProducto(producto.get());
+        pedidoDetalleServicio.save(pedidoDetalle);
 
        return ResponseEntity.ok(pedidoDetalle);
 

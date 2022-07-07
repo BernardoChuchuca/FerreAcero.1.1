@@ -1,5 +1,7 @@
 package usp.edu.ec.FerreAcero.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -22,6 +24,7 @@ public class PedidoDetalle {
 
     @ManyToOne
     @JoinColumn
+    @JsonIgnore
     private Pedido pedido;
 
 

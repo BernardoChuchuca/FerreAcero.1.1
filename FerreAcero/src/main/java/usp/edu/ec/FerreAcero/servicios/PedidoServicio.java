@@ -19,6 +19,11 @@ public class PedidoServicio {
         return (List<Pedido>) pedidoRepositorio.findAll();
     }
 
+    public int  findByPedidoMax(){
+
+        return pedidoRepositorio.findPedidoByMax();
+    }
+
     public Pedido ConsultaDatos(int id){
 
         return (Pedido) pedidoRepositorio.findPedidoById(id);

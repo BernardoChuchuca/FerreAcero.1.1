@@ -14,8 +14,6 @@ public class CrearPedidoDetalle {
     @JsonProperty
     private int producto_id;
 
-    @JsonProperty
-    private int carritodetalle_id;
 
     @JsonProperty
     private int pedido_id;
@@ -45,13 +43,6 @@ public class CrearPedidoDetalle {
         this.producto_id = producto_id;
     }
 
-    public int getCarritodetalle_id() {
-        return carritodetalle_id;
-    }
-
-    public void setCarritodetalle_id(int carritodetalle_id) {
-        this.carritodetalle_id = carritodetalle_id;
-    }
 
     public int getPedido_id() {
         return pedido_id;
