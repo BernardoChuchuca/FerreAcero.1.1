@@ -52,14 +52,14 @@ public class UsuarioControlador {
     @PostMapping("usuario/create")
     public ResponseEntity<String> crearUsuario(@RequestBody CrearUsuario crearUsuario){
         Optional<Persona> persona = personaServicio.findByCodigo(crearUsuario.getPersona_id());
-        Optional<Usuario> usuarioO = usuarioServicio.findById(crearUsuario.getPersona_id());
+        Optional<Usuario> usuario0 = Optional.ofNullable(usuarioServicio.findByIdPer(crearUsuario.getPersona_id()));
 
 
         if(persona.isEmpty()){
             return ResponseEntity.ok("Cliente no existe");
         }else{
 
-            if(usuarioO.isEmpty()){
+            if(usuario0.isEmpty()){
                 Usuario usuario =new Usuario();
                 usuario.setUsuario(crearUsuario.getUsuario());
                 usuario.setClave(crearUsuario.getClave());

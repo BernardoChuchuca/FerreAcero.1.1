@@ -49,5 +49,7 @@ public class UsuarioServicio {
     }
 
 
-
+    public Usuario findByIdPer(int persona_id) {
+        return  usuarioRepositorio.VerPersona(persona_id);
+    }
 }
