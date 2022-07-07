@@ -19,9 +19,9 @@ public class PedidoServicio {
         return (List<Pedido>) pedidoRepositorio.findAll();
     }
 
-    public String ConsultaDatos(int id){
+    public Pedido ConsultaDatos(int id){
 
-        return (String) pedidoRepositorio.findPedidoById(id);
+        return (Pedido) pedidoRepositorio.findPedidoById(id);
     }
 
     public Pedido ConsultaDatosPedido(int numero){

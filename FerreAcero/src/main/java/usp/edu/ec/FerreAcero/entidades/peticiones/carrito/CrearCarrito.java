@@ -17,6 +17,9 @@ public class CrearCarrito {
     @JsonProperty
     private int persona_id;
 
+    @JsonProperty
+    private int pedido_id;
+
     public int getNumero() {
         return numero;
     }
@@ -55,5 +58,13 @@ public class CrearCarrito {
 
     public void setPersona_id(int persona_id) {
         this.persona_id = persona_id;
+    }
+
+    public int getPedido_id() {
+        return pedido_id;
+    }
+
+    public void setPedido_id(int pedido_id) {
+        this.pedido_id = pedido_id;
     }
 }

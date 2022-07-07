@@ -23,9 +23,7 @@ public class Producto implements Serializable {
 
     private Sucursal sucursal;
 
-    @ManyToOne
-    @JoinColumn
-    private Pedido pedido;
+
 
     public int getId() {
         return id;
@@ -83,11 +81,4 @@ public class Producto implements Serializable {
         this.sucursal = sucursal;
     }
 
-    public Pedido getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
-    }
 }

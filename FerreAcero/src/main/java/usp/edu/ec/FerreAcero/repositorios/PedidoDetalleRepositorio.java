@@ -7,7 +7,7 @@ import usp.edu.ec.FerreAcero.entidades.PedidoDetalle;
 public interface PedidoDetalleRepositorio extends CrudRepository<PedidoDetalle, Integer> {
 
     @Query("select h from PedidoDetalle h where h.id = :id")
-    String findPedidoDetalleById(int id);
+    PedidoDetalle findPedidoDetalleById(int id);
 
 
 }
