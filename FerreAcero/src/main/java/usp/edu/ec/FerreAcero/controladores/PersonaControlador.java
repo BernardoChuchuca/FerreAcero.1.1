@@ -63,7 +63,7 @@ public class PersonaControlador {
         persona.setNombre(crear_persona.getNombre());
         persona.setApellido(crear_persona.getApellido());
         persona.setEmail(crear_persona.getEmail());
-        persona.setDireccion(crear_persona.getDireccion());
+
         persona.setTelefono(crear_persona.getTelefono());
         persona.setTipo(crear_persona.getTipo());
 
@@ -104,7 +104,7 @@ public class PersonaControlador {
         personae.setApellido(actualizarPersona.getApellido());
         personae.setCedula(actualizarPersona.getCedula());
         personae.setTelefono(actualizarPersona.getTelefono());
-        personae.setDireccion(actualizarPersona.getDireccion());
+
         personae.setEmail(actualizarPersona.getEmail());
         personae.setTipo(actualizarPersona.getTipo());
         personaServicio.save(personae);

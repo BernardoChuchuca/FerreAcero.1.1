@@ -15,6 +15,10 @@ import java.util.Optional;
 @RestController
 public class PedidoControlador {
 
+   Gestion ges;
+
+
+
 
     private PedidoServicio pedidoServicio;
 
@@ -30,6 +34,8 @@ public class PedidoControlador {
         this.pedidoServicio = pedidoServicio;
 
     }
+
+
 
     @Autowired
     public void setPersonaServicio(PersonaServicio personaServicio) {
@@ -122,5 +128,23 @@ public class PedidoControlador {
         pedidoServicio.delete(id);
         return ResponseEntity.ok("Pedido Eliminado");
     }
+
+    public void Resx(Gestion ges){
+    this.ges=ges;
+
+
+
+    }
+
+    @GetMapping("/pedido/prueba")
+
+    public ResponseEntity<String> getPrueba() throws PedidoException{
+
+       String pro=String.valueOf(ges.getId_persona());
+
+        return new ResponseEntity<String>(pro, HttpStatus.OK);
+
+    }
+
 
 }

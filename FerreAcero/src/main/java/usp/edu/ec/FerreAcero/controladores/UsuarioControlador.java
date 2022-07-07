@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import usp.edu.ec.FerreAcero.entidades.Carrito;
+import usp.edu.ec.FerreAcero.entidades.Pedido;
 import usp.edu.ec.FerreAcero.entidades.Persona;
 import usp.edu.ec.FerreAcero.entidades.Usuario;
 import usp.edu.ec.FerreAcero.entidades.peticiones.Usuario.ActualizarUsuario;
@@ -23,8 +24,8 @@ public class UsuarioControlador {
 
     private PersonaServicio personaServicio;
 
-
-
+    private  PedidoControlador pedidoControlador;
+    Gestion ges=new Gestion();
 
     @Autowired
     public void setPersonaServicio(PersonaServicio personaServicio) {
@@ -43,9 +44,10 @@ public class UsuarioControlador {
 
         return new ResponseEntity<>(listaUsuario, HttpStatus.OK);
     }
-
-
-
+@Autowired
+    public void setPedidoControlador(PedidoControlador pedidoControlador) {
+        this.pedidoControlador = pedidoControlador;
+    }
 
     @PostMapping("usuario/create")
     public ResponseEntity<String> crearUsuario(@RequestBody CrearUsuario crearUsuario){
@@ -117,6 +119,10 @@ public class UsuarioControlador {
 
 
         if(!usuario1.isEmpty()){
+
+            ges.setId_persona(usuario1.get().getPersona().getId());
+
+            pedidoControlador.Resx(ges);
 
             return ResponseEntity.ok("Inicio de Sesion Correcto");
 

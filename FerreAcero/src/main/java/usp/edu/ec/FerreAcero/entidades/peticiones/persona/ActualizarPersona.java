@@ -13,8 +13,7 @@ public class ActualizarPersona {
 
     @JsonProperty
     private String cedula;
-    @JsonProperty
-    private String direccion;
+
     @JsonProperty
     private String email;
     @JsonProperty
@@ -59,13 +58,7 @@ public class ActualizarPersona {
         this.cedula = cedula;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
 
     public String getEmail() {
         return email;
