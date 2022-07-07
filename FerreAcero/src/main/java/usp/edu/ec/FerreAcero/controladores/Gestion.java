@@ -1,7 +1,9 @@
 package usp.edu.ec.FerreAcero.controladores;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import usp.edu.ec.FerreAcero.entidades.*;
+import usp.edu.ec.FerreAcero.servicios.PedidoServicio;
 
 
 import java.util.ArrayList;
@@ -9,6 +11,14 @@ import java.util.List;
 import java.util.Optional;
 
 public class Gestion {
+
+    private PedidoServicio pedidoServicio;
+
+    @Autowired
+    public void setPedidoServicio(PedidoServicio pedidoServicio) {
+        this.pedidoServicio = pedidoServicio;
+
+    }
 
 
     public List<TarjetaCredito> listatajetas(List<TarjetaCredito> tarjetaCreditos, String cedula) {
@@ -219,7 +229,7 @@ public class Gestion {
 
     }
 
-    private double CalcularSubTotal(int cantidad, double precio) {
+    public double CalcularSubTotal(int cantidad, double precio) {
 
 
         return cantidad * precio;
@@ -237,6 +247,21 @@ public class Gestion {
 
         return total;
     }
+
+    /*
+    public int IdAlto(){
+
+
+        pedidoServicio.findAll();
+
+        return id;
+    }
+
+    public List<Pedido> recuperarPedidos(){
+
+        return
+    }
+    */
 }
 
 

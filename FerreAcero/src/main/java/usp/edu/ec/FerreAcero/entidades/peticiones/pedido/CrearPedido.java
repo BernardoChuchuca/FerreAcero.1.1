@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CrearPedido {
 
     @JsonProperty
+    private int id;
+
+    @JsonProperty
     private int numero;
 
     @JsonProperty
@@ -19,8 +22,14 @@ public class CrearPedido {
     @JsonProperty
     private int carrito_id;
 
-    @JsonProperty
-    private int pedidodetalle_id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getNumero() {
         return numero;
@@ -62,11 +71,5 @@ public class CrearPedido {
         this.carrito_id = carrito_id;
     }
 
-    public int getPedidodetalle_id() {
-        return pedidodetalle_id;
-    }
 
-    public void setPedidodetalle_id(int pedidodetalle_id) {
-        this.pedidodetalle_id = pedidodetalle_id;
-    }
 }

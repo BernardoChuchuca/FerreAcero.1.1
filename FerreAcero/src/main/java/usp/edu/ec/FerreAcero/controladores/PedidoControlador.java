@@ -83,17 +83,15 @@ public class PedidoControlador {
             return ResponseEntity.badRequest().build();
         }
 
-        Optional<PedidoDetalle> pedidoDetalle = pedidoDetalleServicio.findById(crearPedido.getPedidodetalle_id());
-        if(pedidoDetalle.isEmpty()){
-            return ResponseEntity.badRequest().build();
-        }
 
         Pedido pedido = new Pedido();
+        pedido.setId(105);
         pedido.setNumero(crearPedido.getNumero());
         pedido.setEstado(crearPedido.getEstado());
-        pedido.setTotal(crearPedido.getTotal());
+        pedido.setTotal(23.45);
         pedido.setPersona(persona.get());
         pedido.setCarrito(carrito.get());
+
         pedidoServicio.save(pedido);
 
         return ResponseEntity.ok(pedido);

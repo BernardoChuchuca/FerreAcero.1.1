@@ -13,5 +13,8 @@ public interface PedidoRepositorio extends CrudRepository<Pedido, Integer> {
     @Query("select g from Pedido  g where g.numero = :numero")
     Pedido findPedidoByNumero(int numero);
 
+    @Query("select max(g.id) from Pedido g ")
+    Integer findPedidoByMax();
+
 
 }

@@ -10,7 +10,6 @@ import java.util.Objects;
 public class Pedido {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private int numero;
@@ -24,7 +23,6 @@ public class Pedido {
     private Persona persona;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<PedidoDetalle> pedidoDetalle;
 
 
