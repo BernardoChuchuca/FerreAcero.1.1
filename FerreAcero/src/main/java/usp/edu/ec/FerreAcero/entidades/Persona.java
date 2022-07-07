@@ -28,7 +28,7 @@ public class Persona implements Serializable {
     private String apellido;
 
     private String cedula;
-    private String direccion;
+
     private String email;
     private String telefono;
 
@@ -101,13 +101,7 @@ public class Persona implements Serializable {
         this.cedula = cedula;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
 
     public String getEmail() {
         return email;
@@ -159,12 +153,12 @@ public class Persona implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Persona)) return false;
         Persona persona = (Persona) o;
-        return id == persona.id && Objects.equals(nombre, persona.nombre) && Objects.equals(apellido, persona.apellido) && Objects.equals(cedula, persona.cedula) && Objects.equals(direccion, persona.direccion) && Objects.equals(email, persona.email) && Objects.equals(telefono, persona.telefono) && Objects.equals(tipo, persona.tipo) && Objects.equals(tarjetaCredito, persona.tarjetaCredito) && Objects.equals(formapago, persona.formapago) && Objects.equals(usuario, persona.usuario) && Objects.equals(direcciones, persona.direcciones);
+        return id == persona.id && Objects.equals(nombre, persona.nombre) && Objects.equals(apellido, persona.apellido) && Objects.equals(cedula, persona.cedula)  && Objects.equals(email, persona.email) && Objects.equals(telefono, persona.telefono) && Objects.equals(tipo, persona.tipo) && Objects.equals(tarjetaCredito, persona.tarjetaCredito) && Objects.equals(formapago, persona.formapago) && Objects.equals(usuario, persona.usuario) && Objects.equals(direcciones, persona.direcciones);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombre, apellido, cedula, direccion, email, telefono, tipo, tarjetaCredito, formapago, usuario, direcciones);
+        return Objects.hash(id, nombre, apellido, cedula, email, telefono, tipo, tarjetaCredito, formapago, usuario, direcciones);
     }
 
     @Override
@@ -175,7 +169,7 @@ public class Persona implements Serializable {
                 ", apellido='" + apellido + '\'' +
 
                 ", cedula='" + cedula + '\'' +
-                ", direccion='" + direccion + '\'' +
+
                 ", email='" + email + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", tipo='" + tipo + '\'' +
@@ -188,7 +182,7 @@ public class Persona implements Serializable {
         this.nombre = nombre;
         this.apellido = apellido;
         this.cedula = cedula;
-        this.direccion = direccion;
+
         this.email = email;
         this.telefono = telefono;
         this.tipo = tipo;
@@ -197,5 +191,8 @@ public class Persona implements Serializable {
         this.usuario = usuario;
         this.direcciones = direcciones;
     }
+
+
+
 
 }

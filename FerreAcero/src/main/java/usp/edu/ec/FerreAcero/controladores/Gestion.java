@@ -10,6 +10,25 @@ import java.util.List;
 public class Gestion {
 
 
+    public int id_persona;
+    public int id_pedido;
+
+    public int getId_persona() {
+        return id_persona;
+    }
+
+    public void setId_persona(int id_persona) {
+        this.id_persona = id_persona;
+    }
+
+    public int getId_pedido() {
+        return id_pedido;
+    }
+
+    public void setId_pedido(int id_pedido) {
+        this.id_pedido = id_pedido;
+    }
+
     public List<TarjetaCredito> listatajetas(List<TarjetaCredito> tarjetaCreditos, String cedula) {
 
         List<TarjetaCredito> listatajetas = new ArrayList<>();
