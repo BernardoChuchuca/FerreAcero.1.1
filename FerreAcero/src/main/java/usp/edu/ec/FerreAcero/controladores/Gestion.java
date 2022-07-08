@@ -297,6 +297,29 @@ public class Gestion {
         return
     }
     */
+
+    public  List<Pedido> PedidoEstado ( String pedido ,List<Pedido> listasPC){
+
+        List<Pedido> nombresPC = new ArrayList<>();
+
+        for (int i = 0; i < listasPC.size(); i++) {
+            if (pedido.equals(listasPC.get(i).getEstado())){
+
+                Pedido ped= new Pedido();
+                ped.setNumero(listasPC.get(i).getNumero());
+                ped.setEstado(listasPC.get(i).getEstado());
+                ped.setPersona(listasPC.get(i).getPersona());
+                ped.setTotal(listasPC.get(i).getTotal());
+
+                nombresPC.add(listasPC.get(i));
+
+
+            }
+
+        }
+
+        return nombresPC;
+    }
 }
 
 

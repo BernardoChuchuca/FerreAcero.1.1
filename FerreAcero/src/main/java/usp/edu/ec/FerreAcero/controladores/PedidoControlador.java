@@ -148,5 +148,14 @@ public class PedidoControlador {
 
     }
 
+    @GetMapping("pedido/ped/{nombreEstado}")
+
+    public ResponseEntity<List<Pedido>> getPedidoEstado(@PathVariable String nombreEstado) throws PedidoException {
+
+        List<Pedido> listaProducto= new Gestion().PedidoEstado(nombreEstado,pedidoServicio.findAll());
+
+        return new ResponseEntity<List<Pedido>>(listaProducto, HttpStatus.OK);
+    }
+
 
 }
