@@ -81,11 +81,11 @@ public class PedidoDetalleControlador {
         pedido1.setPersona(persona1);
         pedido1.setCarrito(carrito1);
 
-        PedidoDetalle pedidoDetalle = new PedidoDetalle();
+       PedidoDetalle pedidoDetalle = new PedidoDetalle();
 
         pedidoDetalle.setCantidad(crearPedidoDetalle.getCantidad());
         pedidoDetalle.setSubtotal(new Gestion().CalcularSubTotal(crearPedidoDetalle.getCantidad(), producto1.getPrecio()));
-        pedidoDetalle.setPedido(pedido1);
+        pedidoDetalle.setPedido(pedido.get());
         pedidoDetalle.setProducto(producto.get());
         pedidoDetalleServicio.save(pedidoDetalle);
 

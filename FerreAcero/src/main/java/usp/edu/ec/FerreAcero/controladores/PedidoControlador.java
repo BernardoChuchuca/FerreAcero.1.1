@@ -29,6 +29,8 @@ public class PedidoControlador {
 
     private PedidoDetalleServicio pedidoDetalleServicio;
 
+    private List<PedidoDetalle> pedidoDetalleList;
+
     @Autowired
     public void setPedidoServicio(PedidoServicio pedidoServicio) {
         this.pedidoServicio = pedidoServicio;
@@ -51,6 +53,7 @@ public class PedidoControlador {
     public void setPedidoDetalleServicio(PedidoDetalleServicio pedidoDetalleServicio) {
         this.pedidoDetalleServicio = pedidoDetalleServicio;
     }
+
 
     @GetMapping("/pedidos")
     public ResponseEntity<List<Pedido>> getAllPedido(){
@@ -91,7 +94,6 @@ public class PedidoControlador {
 
 
         Pedido pedido = new Pedido();
-        pedido.setId(105);
         pedido.setNumero(crearPedido.getNumero());
         pedido.setEstado(crearPedido.getEstado());
         pedido.setTotal(23.45);
