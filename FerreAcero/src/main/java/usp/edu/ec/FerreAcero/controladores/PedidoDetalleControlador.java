@@ -23,12 +23,21 @@ public class PedidoDetalleControlador {
 
     private PedidoServicio pedidoServicio;
 
+    private PersonaServicio personaServicio;
+
+
     private List<PedidoDetalle> pedidoDetalleList=new ArrayList<>();
+
+    Gestion ges;
 
     @Autowired
     public void setPedidoDetalleServicio(PedidoDetalleServicio pedidoDetalleServicio) {
         this.pedidoDetalleServicio = pedidoDetalleServicio;
 
+    }
+    @Autowired
+    public void setPersonaServicio(PersonaServicio personaServicio) {
+        this.personaServicio = personaServicio;
     }
 
     @Autowired
@@ -52,42 +61,55 @@ public class PedidoDetalleControlador {
 
     }
 
-
-    @PostMapping("/pedidodetalle/crear")
-    public ResponseEntity<PedidoDetalle> crearPedidoDetalle(@RequestBody CrearPedidoDetalle crearPedidoDetalle){
-       Optional<Producto> producto = productoServicio.findByCodigo(crearPedidoDetalle.getProducto_id());
+int cont=1;
+    @PostMapping("/pedidoadd/po/crear")
+    public ResponseEntity<PedidoDetalle> crearPedidoDetalle(){
+       Optional<Producto> producto = productoServicio.findByCodigo(2);
        Producto producto1 = producto.orElseThrow(PedidoException::new);
        if(producto.isEmpty()){
            return ResponseEntity.badRequest().build();
        }
+        Optional<Persona> persona = personaServicio.findByCodigo(ges.getId_persona());
+        if(persona.isEmpty()){
 
+            return ResponseEntity.badRequest().build();
+        }
 
-       Optional<Pedido> pedido = pedidoServicio.findById(crearPedidoDetalle.getPedido_id()) ;
-       if(pedido.isEmpty()){
-
-           return ResponseEntity.badRequest().build();
-       }
-       pedidoDetalleList = new Gestion().agregarProductos(pedidoDetalleList, producto1, crearPedidoDetalle.getCantidad());
-
+       pedidoDetalleList = new Gestion().agregarProductos(pedidoDetalleList, producto1, 4);
         Pedido pedido1 = new Pedido();
-        Persona persona1 = new Persona();
-        persona1.setId(1);
-        Carrito carrito1 = new Carrito();
-        carrito1.setId(5);
-        pedido1.setId(105);
-        pedido1.setNumero(5);
-        pedido1.setEstado("Eliminado");
-        pedido1.setTotal(new Gestion().Total(pedidoDetalleList));
-        pedido1.setPersona(persona1);
-        pedido1.setCarrito(carrito1);
-
+       if(cont==1){
+           Carrito carrito1 = new Carrito();
+           carrito1.setId(1);
+           pedido1.setId(125);
+           pedido1.setNumero(5);
+           pedido1.setEstado("Habilitado");
+           pedido1.setTotal(new Gestion().Total(pedidoDetalleList));
+           pedido1.setPersona(persona.get());
+           pedido1.setCarrito(carrito1);
+           pedidoServicio.save(pedido1);
+           cont=2;
+       }
+       //----------------------------------------------------------------------------------------------------------------//
         PedidoDetalle pedidoDetalle = new PedidoDetalle();
+        pedidoDetalle.setSubtotal(new Gestion().CalcularSubTotal(4, producto1.getPrecio()));
+        //---------------------------------------------------------------------------------------------------------------//
 
-        pedidoDetalle.setCantidad(crearPedidoDetalle.getCantidad());
-        pedidoDetalle.setSubtotal(new Gestion().CalcularSubTotal(crearPedidoDetalle.getCantidad(), producto1.getPrecio()));
-        pedidoDetalle.setPedido(pedido1);
-        pedidoDetalle.setProducto(producto.get());
-        pedidoDetalleServicio.save(pedidoDetalle);
+        pedido1.setId(pedidoServicio.findByPedidoMax());
+
+        //----------agregar------------------//
+
+        PedidoDetalle pd=new PedidoDetalle();
+        pd.setPedido(pedido1);
+        pd.setCantidad(4);
+        pd.setSubtotal(new Gestion().CalcularSubTotal(4, producto1.getPrecio()));
+        pd.setProducto(producto1);
+
+        //-------------------------------------//
+
+
+
+
+        pedidoDetalleServicio.save(pd);
 
        return ResponseEntity.ok(pedidoDetalle);
 
@@ -122,5 +144,14 @@ public class PedidoDetalleControlador {
         return ResponseEntity.ok("Pedido Detalle Eliminado");
 
     }
+
+    public void Resx(Gestion ges){
+        this.ges=ges;
+
+
+
+    }
+
+
 
 }

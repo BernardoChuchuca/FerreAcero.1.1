@@ -27,7 +27,8 @@ public class Pedido {
 
 
 
-    @OneToOne
+
+    @ManyToOne
     @JoinColumn
     private Carrito carrito;
 

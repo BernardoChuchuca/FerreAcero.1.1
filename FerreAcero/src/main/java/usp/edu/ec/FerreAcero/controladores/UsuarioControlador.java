@@ -10,6 +10,7 @@ import usp.edu.ec.FerreAcero.entidades.Persona;
 import usp.edu.ec.FerreAcero.entidades.Usuario;
 import usp.edu.ec.FerreAcero.entidades.peticiones.Usuario.ActualizarUsuario;
 import usp.edu.ec.FerreAcero.entidades.peticiones.Usuario.CrearUsuario;
+import usp.edu.ec.FerreAcero.entidades.peticiones.Usuario.InicioUsuario;
 import usp.edu.ec.FerreAcero.entidades.peticiones.carrito.ActualizarCarrito;
 import usp.edu.ec.FerreAcero.entidades.peticiones.carrito.CrearCarrito;
 import usp.edu.ec.FerreAcero.servicios.*;
@@ -109,13 +110,13 @@ public class UsuarioControlador {
 
     }
 
-    @GetMapping("/usuario/iniciar/{usuario}/{clave}")
+    @GetMapping("/usuario/iniciar/")
 
-    public ResponseEntity<String>IniciarSesion(@PathVariable String usuario,@PathVariable String clave){
+    public ResponseEntity<String>IniciarSesion(@RequestBody InicioUsuario inicioUsuario){
 
 
 
-        Optional<Usuario> usuario1 = Optional.ofNullable(usuarioServicio.iniSesion(clave,usuario));
+        Optional<Usuario> usuario1 = Optional.ofNullable(usuarioServicio.iniSesion(inicioUsuario.getContraseña(), inicioUsuario.getUsuario()));
 
 
         if(!usuario1.isEmpty()){
@@ -124,11 +125,11 @@ public class UsuarioControlador {
 
             pedidoControlador.Resx(ges);
 
-            return ResponseEntity.ok("Inicio de Sesion Correcto");
+            return ResponseEntity.ok("Inicia Sesion como "+usuario1.get().getPersona().getNombre());
 
         }else{
 
-            return ResponseEntity.ok("Inicio de Sesion Incorrecto");
+            return ResponseEntity.ok("Datos Incorrectos");
         }
 
 

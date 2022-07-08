@@ -3,6 +3,7 @@ package usp.edu.ec.FerreAcero.entidades;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,6 +18,9 @@ public class Carrito implements Serializable {
     @ManyToOne
     @JoinColumn
     private Persona persona;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "carrito",cascade = CascadeType.ALL)
+     private List<Pedido> pedido;
 
 
     public Carrito(int id, int numero, Date fecha, double total, double subtotal, Persona persona) {
