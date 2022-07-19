@@ -5,16 +5,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import usp.edu.ec.FerreAcero.entidades.*;
+import usp.edu.ec.FerreAcero.entidades.peticiones.Usuario.ActualizarUsuario;
+import usp.edu.ec.FerreAcero.entidades.peticiones.pedido.ActualizarPedido;
 import usp.edu.ec.FerreAcero.entidades.peticiones.pedidodetalle.ActualizarPedidoDetalle;
 import usp.edu.ec.FerreAcero.entidades.peticiones.pedidodetalle.CrearPedidoDetalle;
 import usp.edu.ec.FerreAcero.servicios.*;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class PedidoDetalleControlador {
+    Gestion ges;
 
     private PedidoDetalleServicio pedidoDetalleServicio;
 
@@ -28,7 +32,7 @@ public class PedidoDetalleControlador {
 
     private List<PedidoDetalle> pedidoDetalleList=new ArrayList<>();
 
-    Gestion ges;
+
 
     @Autowired
     public void setPedidoDetalleServicio(PedidoDetalleServicio pedidoDetalleServicio) {
@@ -62,17 +66,61 @@ public class PedidoDetalleControlador {
     }
 
 int cont=1;
-    @PostMapping("/pedidoadd/po/crear")
-    public ResponseEntity<PedidoDetalle> crearPedidoDetalle(){
-       Optional<Producto> producto = productoServicio.findByCodigo(2);
+    int pe_id=0;
+    @PostMapping("/pedidoadd/pox/crear")
+    public ResponseEntity<PedidoDetalle> crearPedidoDetalle(@RequestBody CrearPedidoDetalle crearPedidoDetalle){
+       Optional<Producto> producto = productoServicio.findByCodigo(crearPedidoDetalle.getProducto_id());
        Producto producto1 = producto.orElseThrow(PedidoException::new);
        if(producto.isEmpty()){
            return ResponseEntity.badRequest().build();
        }
         Optional<Persona> persona = personaServicio.findByCodigo(ges.getId_persona());
+        Persona persona1=persona.orElseThrow(ProductoExeption::new);
         if(persona.isEmpty()){
 
             return ResponseEntity.badRequest().build();
+        }
+
+
+       pedidoDetalleList = new Gestion().agregarProductos(pedidoDetalleList, producto1, crearPedidoDetalle.getCantidad());
+
+      Carrito car=new Carrito();
+      car.setId(1);
+
+
+        //---------------------------------------------------------------------------------------------------------------//
+        Pedido pedido1 = new Pedido();
+        if(cont==1){
+            pedido1.setId(pedidoServicio.findByPedidoMax()+1);
+            pedido1.setNumero(100);
+            pedido1.setPersona(persona1);
+            pedido1.setTotal(new Gestion().Total(pedidoDetalleList));
+            pedido1.setEstado("Activo");
+            pedido1.setCarrito(car);
+            pe_id=pedido1.getId();
+            cont++;
+            pedidoServicio.save(pedido1);
+        }else{
+             pedido1.setId(pe_id);
+            ActualizarPedido acp=new ActualizarPedido();
+            acp.setId(pe_id);
+            //acp.setTotal(ped);
+
+            Optional<Pedido> pedidoO = pedidoServicio.findById(acp.getId());
+
+            if(pedidoO.isEmpty()){
+                return ResponseEntity.badRequest().build();
+            }
+
+            Pedido pedidon=pedidoO.get();
+            pedidon.setTotal(new Gestion().Total(pedidoDetalleList));
+
+
+            pedidoServicio.save(pedidon);
+
+
+
+
         }
 
        pedidoDetalleList = new Gestion().agregarProductos(pedidoDetalleList, producto1, 4);
@@ -91,10 +139,38 @@ int cont=1;
 
 
 
+        pedidoDetalle.setCantidad(crearPedidoDetalle.getCantidad());
+        pedidoDetalle.setSubtotal(new Gestion().CalcularSubTotal(crearPedidoDetalle.getCantidad(), producto1.getPrecio()));
+        pedidoDetalle.setPedido(pedido.get());
+        pedidoDetalle.setProducto(producto.get());
+        pedidoDetalleServicio.save(pedidoDetalle);
+
+       if(cont==1){
+           Carrito carrito1 = new Carrito();
+           carrito1.setId(1);
+           pedido1.setId(125);
+           pedido1.setNumero(5);
+           pedido1.setEstado("Habilitado");
+           pedido1.setTotal(new Gestion().Total(pedidoDetalleList));
+           pedido1.setPersona(persona.get());
+           pedido1.setCarrito(carrito1);
+           pedidoServicio.save(pedido1);
+           cont=2;
+       }
+       //----------------------------------------------------------------------------------------------------------------//
+        PedidoDetalle pedidoDetalle = new PedidoDetalle();
+        pedidoDetalle.setSubtotal(new Gestion().CalcularSubTotal(4, producto1.getPrecio()));
+        //---------------------------------------------------------------------------------------------------------------//
+
+
+
+        //----------agregar------------------//
+
         PedidoDetalle pd=new PedidoDetalle();
+
         pd.setPedido(pedido1);
-        pd.setCantidad(4);
-        pd.setSubtotal(new Gestion().CalcularSubTotal(4, producto1.getPrecio()));
+        pd.setCantidad(crearPedidoDetalle.getCantidad());
+        pd.setSubtotal(new Gestion().CalcularSubTotal(crearPedidoDetalle.getCantidad(), producto1.getPrecio()));
         pd.setProducto(producto1);
 
         //-------------------------------------//
@@ -106,6 +182,12 @@ int cont=1;
 
 
        return ResponseEntity.ok(pd);
+
+
+
+       return ResponseEntity.ok(pedidoDetalle);
+
+
 
     }
 
@@ -141,6 +223,8 @@ int cont=1;
 
     public void Resx(Gestion ges){
         this.ges=ges;
+
+        System.out.println(ges.getId_persona());
 
 
 

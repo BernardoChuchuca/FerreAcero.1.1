@@ -26,6 +26,8 @@ public class UsuarioControlador {
     private PersonaServicio personaServicio;
 
     private  PedidoControlador pedidoControlador;
+
+    private  PedidoDetalleControlador pedidoDetalleControlador;
     Gestion ges=new Gestion();
 
     @Autowired
@@ -48,6 +50,10 @@ public class UsuarioControlador {
 @Autowired
     public void setPedidoControlador(PedidoControlador pedidoControlador) {
         this.pedidoControlador = pedidoControlador;
+    }
+@Autowired
+    public void setPedidoDetalleControlador(PedidoDetalleControlador pedidoDetalleControlador) {
+        this.pedidoDetalleControlador = pedidoDetalleControlador;
     }
 
     @PostMapping("usuario/create")
@@ -123,7 +129,7 @@ public class UsuarioControlador {
 
             ges.setId_persona(usuario1.get().getPersona().getId());
 
-            pedidoControlador.Resx(ges);
+            pedidoDetalleControlador .Resx(ges);
 
             return ResponseEntity.ok("Inicia Sesion como "+usuario1.get().getPersona().getNombre());
 
