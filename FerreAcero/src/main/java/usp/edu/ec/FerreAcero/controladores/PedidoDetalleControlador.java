@@ -123,11 +123,6 @@ int cont=1;
 
         }
 
-
-
-
-
-
         //----------agregar------------------//
 
         PedidoDetalle pd=new PedidoDetalle();
@@ -146,6 +141,8 @@ int cont=1;
 
 
        return ResponseEntity.ok(pd);
+
+
 
 
 
