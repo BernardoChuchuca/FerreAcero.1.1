@@ -68,7 +68,7 @@ public class PedidoDetalleControlador {
 int cont=1;
     int pe_id=0;
     @PostMapping("/pedidoadd/pox/crear")
-    public ResponseEntity<PedidoDetalle> crearPedidoDetalle(@RequestBody CrearPedidoDetalle crearPedidoDetalle){
+    public ResponseEntity<String> crearPedidoDetalle(@RequestBody CrearPedidoDetalle crearPedidoDetalle){
        Optional<Producto> producto = productoServicio.findByCodigo(crearPedidoDetalle.getProducto_id());
        Producto producto1 = producto.orElseThrow(PedidoException::new);
        if(producto.isEmpty()){
@@ -101,6 +101,7 @@ int cont=1;
             cont++;
             pedidoServicio.save(pedido1);
         }else{
+
              pedido1.setId(pe_id);
             ActualizarPedido acp=new ActualizarPedido();
             acp.setId(pe_id);
@@ -140,7 +141,7 @@ int cont=1;
         pedidoDetalleServicio.save(pd);
 
 
-       return ResponseEntity.ok(pd);
+       return ResponseEntity.ok("Pedido Agregado");
 
 
 
