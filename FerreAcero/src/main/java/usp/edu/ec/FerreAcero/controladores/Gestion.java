@@ -243,6 +243,27 @@ public class Gestion {
 
     }
 
+    public List<Pedido> agregarPedidosDetalles(List<Pedido> pedidoList, List<PedidoDetalle> pedidoDetalleList ){
+        List<Pedido> pedidoList1 = new ArrayList<>();
+        for (int i=0; i < pedidoDetalleList.size();i++){
+            if (pedidoList.get(i).getId()==pedidoDetalleList.get(i).getPedido().getId()){
+                Pedido pedido = new Pedido();
+                pedido.setNumero(pedidoList.get(i).getNumero());
+                pedido.setEstado(pedidoList.get(i).getEstado());
+                pedido.setTotal(Total(pedidoDetalleList));
+                pedido.setPersona(pedidoList.get(i).getPersona());
+
+
+                pedidoList.add(pedido);
+
+
+            }
+
+        }
+
+        return pedidoList;
+    }
+
     public double CalcularSubTotal(int cantidad, double precio) {
 
 
@@ -256,10 +277,10 @@ public class Gestion {
         for(int i = 0 ; i<pedidoDetalleList.size(); i++){
 
             total = total + pedidoDetalleList.get(i).getSubtotal();
-
         }
 
         return total;
+
     }
 
     /*
