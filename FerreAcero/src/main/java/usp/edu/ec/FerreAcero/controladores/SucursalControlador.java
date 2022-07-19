@@ -3,9 +3,7 @@ package usp.edu.ec.FerreAcero.controladores;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import usp.edu.ec.FerreAcero.entidades.FormaPago;
 import usp.edu.ec.FerreAcero.entidades.Persona;
 
@@ -20,6 +18,11 @@ import usp.edu.ec.FerreAcero.servicios.SucursalServicio;
 
 import java.util.List;
 import java.util.Optional;
+
+
+
+@CrossOrigin(origins = "*",  maxAge=3600, methods= {RequestMethod.GET,RequestMethod.POST})
+
 
 @RestController
 public class SucursalControlador {
@@ -48,7 +51,7 @@ public class SucursalControlador {
 
     }
 
-    @GetMapping("/sucursalLista")
+    @GetMapping("/sucursal/Lista")
     public ResponseEntity<List<String>> getAllCategoria() {
 
         List<String> listaCategoria = new Gestion().sucurNombre(sucursalServicio.findAll());
@@ -57,7 +60,7 @@ public class SucursalControlador {
 
     }
 
-    @GetMapping("sucursal/p/{nombreSu}")
+    @GetMapping("sucursal/{nombreSu}")
 
     public ResponseEntity<List<String>> getSucursalProducto(@PathVariable String nombreSu) throws SucursalException {
         Optional<Sucursal> sucursal1 = Optional.ofNullable(sucursalServicio.ConsultaDatosP(nombreSu));
