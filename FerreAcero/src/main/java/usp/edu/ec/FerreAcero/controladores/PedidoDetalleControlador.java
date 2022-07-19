@@ -89,34 +89,7 @@ int cont=1;
         pedido1.setPersona(persona1);
         pedido1.setCarrito(carrito1);
 
-       PedidoDetalle pedidoDetalle = new PedidoDetalle();
 
-        pedidoDetalle.setCantidad(crearPedidoDetalle.getCantidad());
-        pedidoDetalle.setSubtotal(new Gestion().CalcularSubTotal(crearPedidoDetalle.getCantidad(), producto1.getPrecio()));
-        pedidoDetalle.setPedido(pedido.get());
-        pedidoDetalle.setProducto(producto.get());
-        pedidoDetalleServicio.save(pedidoDetalle);
-
-       if(cont==1){
-           Carrito carrito1 = new Carrito();
-           carrito1.setId(1);
-           pedido1.setId(125);
-           pedido1.setNumero(5);
-           pedido1.setEstado("Habilitado");
-           pedido1.setTotal(new Gestion().Total(pedidoDetalleList));
-           pedido1.setPersona(persona.get());
-           pedido1.setCarrito(carrito1);
-           pedidoServicio.save(pedido1);
-           cont=2;
-       }
-       //----------------------------------------------------------------------------------------------------------------//
-        PedidoDetalle pedidoDetalle = new PedidoDetalle();
-        pedidoDetalle.setSubtotal(new Gestion().CalcularSubTotal(4, producto1.getPrecio()));
-        //---------------------------------------------------------------------------------------------------------------//
-
-        pedido1.setId(pedidoServicio.findByPedidoMax());
-
-        //----------agregar------------------//
 
         PedidoDetalle pd=new PedidoDetalle();
         pd.setPedido(pedido1);
@@ -132,7 +105,7 @@ int cont=1;
         pedidoDetalleServicio.save(pd);
 
 
-       return ResponseEntity.ok(pedidoDetalle);
+       return ResponseEntity.ok(pd);
 
     }
 
