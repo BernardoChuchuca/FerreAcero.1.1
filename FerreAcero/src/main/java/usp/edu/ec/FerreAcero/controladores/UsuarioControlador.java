@@ -18,7 +18,9 @@ import usp.edu.ec.FerreAcero.servicios.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*",  maxAge=3600, methods= {RequestMethod.GET,RequestMethod.POST})
 @RestController
+
 public class UsuarioControlador {
 
     private UsuarioServicio usuarioServicio;
@@ -116,7 +118,7 @@ public class UsuarioControlador {
 
     }
 
-    @GetMapping("/usuario/iniciar/")
+    @PostMapping ("/usuario/iniciar")
 
     public ResponseEntity<String>IniciarSesion(@RequestBody InicioUsuario inicioUsuario){
 
