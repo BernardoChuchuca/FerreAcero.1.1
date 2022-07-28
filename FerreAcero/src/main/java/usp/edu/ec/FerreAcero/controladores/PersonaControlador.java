@@ -23,7 +23,7 @@ public class PersonaControlador {
 
         this.personaServicio = personaServicio;
     }
-
+    //nacho menestra
     @GetMapping("/personas")
     public ResponseEntity<List<Persona>> getAllPersona(){
 
